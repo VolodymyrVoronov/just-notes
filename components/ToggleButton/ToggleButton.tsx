@@ -32,7 +32,7 @@ const ToggleButton = ({
       </span>
 
       {active && (
-        <motion.span className={styles["active-bar"]} layoutId="active" />
+        <motion.span className={styles["active-bar"]} layoutId="active-bar" />
       )}
     </button>
   );
