@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  flex-direction: row;
+
+  padding: 15px;
+
+  background-color: var(--white);
+
+  border-radius: 50px;
+
+  box-shadow: var(--box-shadow-1);
+}

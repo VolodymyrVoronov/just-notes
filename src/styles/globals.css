@@ -22,6 +22,7 @@ body {
   --black: #000000;
 
   --black-light: #161516;
+  --black-lighter: #3b383b;
   --gray-light: #BDBCBD;
 
   --orange: #FF9B73;
@@ -33,4 +34,6 @@ body {
 
   --poppins: "Poppins", sans-serif;
   --bungee-shade: "Bungee Shade", cursive;
+
+  --box-shadow-1: 4px 4px 4px 0 rgba(0, 0, 0, 0.50);
 }

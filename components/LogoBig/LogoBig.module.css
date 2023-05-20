@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
 
-  /* height: 100%; */
   width: 150px;
 
   padding: 35px;
@@ -10,7 +9,7 @@
   background-color: var(--white);
 
   border-radius: 50px;
-  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.50);
+  box-shadow: var(--box-shadow-1);
 }
 
 .word {

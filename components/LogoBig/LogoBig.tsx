@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
 
@@ -40,4 +40,4 @@ const LogoBig = ({ logoText = "Just Notes" }: ILogoBigProps): JSX.Element => {
   );
 };
 
-export default LogoBig;
+export default memo(LogoBig);

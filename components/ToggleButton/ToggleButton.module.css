@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  justify-content: center;
+
+  padding: 15px 20px;
+
+  font-family: var(--poppins);
+  font-size: 36px;
+  line-height: 36px;
+  font-weight: 600;
+
+  color: var(--black-light);
+
+  border: none;
+  background-color: var(--white);
+  border-radius: 50px;
+
+  cursor: pointer;
+
+  transition: all 250ms ease;
+}
+
+.root:hover {
+  color: var(--white);
+  background-color: var(--black-lighter);
+}
+
+.active {
+  color: var(--white);
+  background-color: var(--black-light);
+
+  transition: all 250ms ease;
+}
+
+.active:disabled {
+  color: var(--white);
+  background-color: var(--black-light);
+  cursor: default;
+}
