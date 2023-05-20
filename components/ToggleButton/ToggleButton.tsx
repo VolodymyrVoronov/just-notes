@@ -1,10 +1,14 @@
-import React from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import cn from "classnames";
 import { motion } from "framer-motion";
 
 import styles from "./ToggleButton.module.css";
 
-interface IToggleButtonProps {
+interface IToggleButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   text: string;
   active: boolean;
   onClick: () => void;
@@ -14,6 +18,8 @@ const ToggleButton = ({
   text,
   active,
   onClick,
+
+  ...props
 }: IToggleButtonProps): JSX.Element => {
   return (
     <button
@@ -22,6 +28,7 @@ const ToggleButton = ({
       disabled={active}
       type="button"
       aria-label={text}
+      {...props}
     >
       <span
         className={cn({

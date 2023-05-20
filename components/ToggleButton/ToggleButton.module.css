@@ -18,7 +18,6 @@
 
   cursor: pointer;
 
-  transition: all 50ms ease-in;
   transition-delay: 150ms;
 }
 
@@ -32,7 +31,6 @@
 
   color: var(--white);
 
-  transition: all 50ms ease-in;
   transition-delay: 150ms;
 }
 
