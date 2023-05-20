@@ -1,4 +1,7 @@
-import "./globals.css";
+import "../styles/globals.css";
+
+import "@fontsource/bungee-shade";
+import "@fontsource/poppins";
 
 export const metadata = {
   title: "Just Notes",

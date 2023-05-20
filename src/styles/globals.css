@@ -1,0 +1,36 @@
+html,
+body {
+  min-width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-image: url("../../public/images/root-bg-01.png");
+  background-size: cover;
+  background-position: top center;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+
+  --black-light: #161516;
+  --gray-light: #BDBCBD;
+
+  --orange: #FF9B73;
+  --yellow: #FFC972;
+  --purple: #B692FE;
+  --blue: #01D4FE;
+  --lime: #E4EE90;
+  --gold: #FDCB04;
+
+  --poppins: "Poppins", sans-serif;
+  --bungee-shade: "Bungee Shade", cursive;
+}
