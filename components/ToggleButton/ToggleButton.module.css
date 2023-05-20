@@ -1,4 +1,5 @@
 .root {
+  position: relative;
   display: flex;
   justify-content: center;
 
@@ -12,28 +13,39 @@
   color: var(--black-light);
 
   border: none;
-  background-color: var(--white);
+  background-color: transparent;
   border-radius: 50px;
 
   cursor: pointer;
 
-  transition: all 250ms ease;
+  transition: all 50ms ease-in;
+  transition-delay: 150ms;
 }
 
-.root:hover {
-  color: var(--white);
-  background-color: var(--black-lighter);
+.root:disabled {
+  cursor: default;
 }
 
 .active {
-  color: var(--white);
-  background-color: var(--black-light);
+  position: relative;
+  z-index: 2;
 
-  transition: all 250ms ease;
+  color: var(--white);
+
+  transition: all 50ms ease-in;
+  transition-delay: 150ms;
 }
 
-.active:disabled {
-  color: var(--white);
+.active-bar {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
   background-color: var(--black-light);
-  cursor: default;
+
+  border-radius: 50px;
 }

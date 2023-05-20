@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "classnames";
+import { motion } from "framer-motion";
 
 import styles from "./ToggleButton.module.css";
 
@@ -17,14 +18,22 @@ const ToggleButton = ({
   return (
     <button
       onClick={onClick}
-      className={cn(styles.root, {
-        [styles.active]: active,
-      })}
+      className={styles.root}
       disabled={active}
       type="button"
       aria-label={text}
     >
-      {text}
+      <span
+        className={cn({
+          [styles.active]: active,
+        })}
+      >
+        {text}
+      </span>
+
+      {active && (
+        <motion.span className={styles["active-bar"]} layoutId="active" />
+      )}
     </button>
   );
 };
