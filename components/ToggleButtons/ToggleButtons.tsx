@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+import { ToggleButtonType, TToggleButtons } from "../../types/toggle-buttons";
+import { FormType, TForm } from "../../types/form";
+
 import ToggleButton from "../ToggleButton/ToggleButton";
 
 import styles from "./ToggleButtons.module.css";
@@ -10,7 +13,7 @@ import styles from "./ToggleButtons.module.css";
 interface IToggleButtonsProps {
   leftButton: string;
   rightButton: string;
-  getToggleStatus: (flag: boolean) => void;
+  getToggleStatus: (flag: TForm) => void;
 }
 
 const ToggleButtons = ({
@@ -18,16 +21,18 @@ const ToggleButtons = ({
   rightButton,
   getToggleStatus,
 }: IToggleButtonsProps): JSX.Element => {
-  const [activeButton, setActiveButton] = useState<"left" | "right">("left");
+  const [activeButton, setActiveButton] = useState<TToggleButtons>(
+    ToggleButtonType.left
+  );
 
   const onLeftButtonClick = (): void => {
-    getToggleStatus(false);
-    setActiveButton("left");
+    getToggleStatus(FormType.signin);
+    setActiveButton(ToggleButtonType.left);
   };
 
   const onRightButtonClick = (): void => {
-    getToggleStatus(true);
-    setActiveButton("right");
+    getToggleStatus(FormType.signup);
+    setActiveButton(ToggleButtonType.right);
   };
 
   return (
@@ -49,13 +54,13 @@ const ToggleButtons = ({
       <ToggleButton
         text={leftButton}
         onClick={onLeftButtonClick}
-        active={activeButton === "left"}
+        active={activeButton === ToggleButtonType.left}
       />
 
       <ToggleButton
         text={rightButton}
         onClick={onRightButtonClick}
-        active={activeButton === "right"}
+        active={activeButton === ToggleButtonType.right}
       />
     </motion.div>
   );
