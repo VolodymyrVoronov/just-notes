@@ -13,25 +13,25 @@ import styles from "./ToggleButtons.module.css";
 interface IToggleButtonsProps {
   leftButton: string;
   rightButton: string;
-  getToggleStatus: (flag: TForm) => void;
+  toggleStatusSwitch: (flag: TForm) => void;
 }
 
 const ToggleButtons = ({
   leftButton,
   rightButton,
-  getToggleStatus,
+  toggleStatusSwitch,
 }: IToggleButtonsProps): JSX.Element => {
   const [activeButton, setActiveButton] = useState<TToggleButtons>(
     ToggleButtonType.left
   );
 
   const onLeftButtonClick = (): void => {
-    getToggleStatus(FormType.signin);
+    toggleStatusSwitch(FormType.signin);
     setActiveButton(ToggleButtonType.left);
   };
 
   const onRightButtonClick = (): void => {
-    getToggleStatus(FormType.signup);
+    toggleStatusSwitch(FormType.signup);
     setActiveButton(ToggleButtonType.right);
   };
 

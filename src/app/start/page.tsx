@@ -26,7 +26,7 @@ const StartPage: NextPage = (): JSX.Element => {
       </div>
       <div className={styles["right-side"]}>
         <ToggleButtons
-          getToggleStatus={getToggleStatus}
+          toggleStatusSwitch={getToggleStatus}
           leftButton="Signin"
           rightButton="Signup"
         />
