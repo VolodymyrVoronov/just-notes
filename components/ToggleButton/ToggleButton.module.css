@@ -21,6 +21,10 @@
   transition-delay: 150ms;
 }
 
+.root:focus {
+  outline-color: var(--purple);
+}
+
 .root:disabled {
   cursor: default;
 }
