@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 150px;
+
+  background-color: var(--white);
+
+  border-radius: 50px;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.50);
+}
+
+.word {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  font-family: var(--bungee-shade);
+  font-size: 74px;
+  line-height: 84px;
+
+  color: var(--black-light);
+}
