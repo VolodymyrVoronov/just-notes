@@ -9,13 +9,13 @@ interface IInputProps
     HTMLInputElement
   > {
   labelText: string;
-
   className?: string;
 }
 
 const Input = ({
   labelText,
   className,
+
   ...props
 }: IInputProps): JSX.Element => {
   const id = useId();

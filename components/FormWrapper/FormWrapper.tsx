@@ -10,7 +10,6 @@ interface IFormWrapperProps
 
 const FormWrapper = ({
   className,
-
   children,
 
   ...props
