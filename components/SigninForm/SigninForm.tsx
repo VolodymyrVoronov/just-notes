@@ -14,7 +14,7 @@ interface ISigninFormProps {
 }
 
 const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
-  const LoginInputRef = useRef<HTMLInputElement>(null);
+  const loginInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<SignInFormState>({
     login: "",
@@ -29,7 +29,7 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   };
 
   useEffect(() => {
-    LoginInputRef.current?.focus();
+    loginInputRef.current?.focus();
   }, []);
 
   console.log(formData);
@@ -37,7 +37,7 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   return (
     <FormWrapper className={className}>
       <Input
-        ref={LoginInputRef}
+        ref={loginInputRef}
         onChange={onInputChange}
         value={formData.login}
         labelText="Login"
