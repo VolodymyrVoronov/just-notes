@@ -1,4 +1,10 @@
-import { DetailedHTMLProps, InputHTMLAttributes, useId } from "react";
+import {
+  forwardRef,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useId,
+  Ref,
+} from "react";
 import cn from "classnames";
 
 import styles from "./Input.module.css";
@@ -12,22 +18,29 @@ interface IInputProps
   className?: string;
 }
 
-const Input = ({
-  labelText,
-  className,
+const Input = forwardRef(
+  (
+    {
+      labelText,
+      className,
 
-  ...props
-}: IInputProps): JSX.Element => {
-  const id = useId();
+      ...props
+    }: IInputProps,
+    ref?: Ref<HTMLInputElement>
+  ): JSX.Element => {
+    const id = useId();
 
-  return (
-    <div className={cn(styles.root, className)}>
-      <label htmlFor={id} className={styles.label}>
-        {labelText}
-      </label>
-      <input className={styles.input} id={id} {...props} />
-    </div>
-  );
-};
+    return (
+      <div className={cn(styles.root, className)}>
+        <label htmlFor={id} className={styles.label}>
+          {labelText}
+        </label>
+        <input ref={ref} className={styles.input} id={id} {...props} />
+      </div>
+    );
+  }
+);
+
+Input.displayName = "Input";
 
 export default Input;

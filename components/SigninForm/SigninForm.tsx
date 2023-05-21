@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useRef, useEffect } from "react";
 
 import { SignInFormState } from "../../types/form-state";
 
@@ -14,6 +14,8 @@ interface ISigninFormProps {
 }
 
 const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
+  const LoginInputRef = useRef<HTMLInputElement>(null);
+
   const [formData, setFormData] = useState<SignInFormState>({
     login: "",
     password: "",
@@ -26,11 +28,16 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
     });
   };
 
+  useEffect(() => {
+    LoginInputRef.current?.focus();
+  }, []);
+
   console.log(formData);
 
   return (
     <FormWrapper className={className}>
       <Input
+        ref={LoginInputRef}
         onChange={onInputChange}
         value={formData.login}
         labelText="Login"
