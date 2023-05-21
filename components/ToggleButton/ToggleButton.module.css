@@ -22,7 +22,7 @@
 }
 
 .root:focus {
-  outline-color: var(--purple);
+  outline: var(--button-focus);
 }
 
 .root:disabled {

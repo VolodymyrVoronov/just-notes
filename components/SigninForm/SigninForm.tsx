@@ -6,6 +6,7 @@ import { SignInFormState } from "../../types/form-state";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
+import Button from "../Button/Button";
 
 import styles from "./SigninForm.module.css";
 
@@ -28,11 +29,13 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
     });
   };
 
+  const onSignInButtonClick = (): void => {
+    console.log(formData);
+  };
+
   useEffect(() => {
     loginInputRef.current?.focus();
   }, []);
-
-  console.log(formData);
 
   return (
     <FormWrapper className={className}>
@@ -52,6 +55,15 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
         labelText="Password"
         type="password"
         name="password"
+      />
+
+      <Button
+        onClick={onSignInButtonClick}
+        className={styles["sign-in-button"]}
+        disabled={!formData.login || !formData.password}
+        text="Sign&nbsp;in"
+        iconUrl="/icons/circle-arrow-01.svg"
+        aria-label="Sign in"
       />
     </FormWrapper>
   );

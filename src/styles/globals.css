@@ -39,4 +39,6 @@ body {
 
   --box-shadow-small: 1px 1px 1px 0 rgba(0, 0, 0, 0.50);
   --box-shadow-medium: 4px 4px 4px 0 rgba(0, 0, 0, 0.50);
+
+  --button-focus: 5px solid rgb(100, 231, 231);
 }

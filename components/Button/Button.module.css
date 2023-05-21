@@ -1,0 +1,51 @@
+.root {
+  display: flex;
+  align-items: center;
+
+  padding: 5px;
+
+  background-color: var(--black-light);
+
+  box-shadow: var(--box-shadow-small);
+  border-radius: 50px;
+
+  cursor: pointer;
+
+  transition: all 500ms ease;
+}
+
+.root:focus {
+  outline: var(--button-focus);
+}
+
+.root-text-only {
+  padding: 0;
+}
+
+.root-text-only:hover,
+.root-icon-only:hover {
+  background-color: var(--black-lighter);
+}
+
+.root:disabled,
+.root-text-only:disabled {
+  opacity: 0.5;
+
+  cursor: default;
+
+  transition: all 500ms ease;
+}
+
+.text {
+  padding: 0 15px;
+
+  font-family: var(--poppins);
+  font-size: 36px;
+  line-height: 36px;
+
+  color: var(--white);
+}
+
+.text-only {
+  padding: 10px 15px;
+}

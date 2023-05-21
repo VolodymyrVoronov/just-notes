@@ -1,3 +1,9 @@
 .password-field {
   margin-top: 50px;
 }
+
+.sign-in-button {
+  align-self: flex-end;
+
+  margin-top: 50px;
+}
