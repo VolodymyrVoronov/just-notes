@@ -1,7 +1,7 @@
 "use client";
 
 import { NextPage } from "next";
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { FormType, TForm } from "../../../types/form-variants";
@@ -29,8 +29,8 @@ const StartPage: NextPage = (): JSX.Element => {
       <div className={styles["right-side"]}>
         <ToggleButtons
           toggleStatusSwitch={getToggleStatus}
-          leftButton="Signin"
-          rightButton="Signup"
+          leftButton="Sign in"
+          rightButton="Sign up"
         />
 
         <motion.div
