@@ -1,5 +1,3 @@
-"use client";
-
 import { ChangeEvent, useState, useRef, useEffect } from "react";
 
 import { SignInFormState } from "../../types/form-state";
