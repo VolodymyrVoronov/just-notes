@@ -3,10 +3,11 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
 
-import { FormType, TForm } from "../../../types/form";
+import { FormType, TForm } from "../../../types/form-variants";
 
 import LogoBig from "../../../components/LogoBig/LogoBig";
 import ToggleButtons from "../../../components/ToggleButtons/ToggleButtons";
+import SigninForm from "../../../components/SigninForm/SigninForm";
 
 import styles from "./styles.module.css";
 
@@ -31,7 +32,11 @@ const StartPage: NextPage = (): JSX.Element => {
           rightButton="Signup"
         />
 
-        {toggleFormType === FormType.signin ? "Signin" : "Signup"}
+        {toggleFormType === FormType.signin ? (
+          <SigninForm className={styles["signin-form"]} />
+        ) : (
+          "Signup"
+        )}
       </div>
     </div>
   );

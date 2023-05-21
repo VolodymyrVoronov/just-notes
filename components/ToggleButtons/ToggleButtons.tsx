@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import cn from "classnames";
 
 import { ToggleButtonType, TToggleButtons } from "../../types/toggle-buttons";
-import { FormType, TForm } from "../../types/form";
+import { FormType, TForm } from "../../types/form-variants";
 
 import ToggleButton from "../ToggleButton/ToggleButton";
 
@@ -14,12 +15,14 @@ interface IToggleButtonsProps {
   leftButton: string;
   rightButton: string;
   toggleStatusSwitch: (flag: TForm) => void;
+  className?: string;
 }
 
 const ToggleButtons = ({
   leftButton,
   rightButton,
   toggleStatusSwitch,
+  className,
 }: IToggleButtonsProps): JSX.Element => {
   const [activeButton, setActiveButton] = useState<TToggleButtons>(
     ToggleButtonType.left
@@ -37,7 +40,7 @@ const ToggleButtons = ({
 
   return (
     <motion.div
-      className={styles.root}
+      className={cn(styles.root, className)}
       initial={{
         y: -200,
         opacity: 0,

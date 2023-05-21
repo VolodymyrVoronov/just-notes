@@ -24,6 +24,7 @@ body {
   --black-light: #161516;
   --black-lighter: #3b383b;
   --gray-light: #BDBCBD;
+  --gray-lighter: #CED4DA;
 
   --orange: #FF9B73;
   --yellow: #FFC972;
@@ -35,5 +36,6 @@ body {
   --poppins: "Poppins", sans-serif;
   --bungee-shade: "Bungee Shade", cursive;
 
-  --box-shadow-1: 4px 4px 4px 0 rgba(0, 0, 0, 0.50);
+  --box-shadow-small: 1px 1px 1px 0 rgba(0, 0, 0, 0.50);
+  --box-shadow-medium: 4px 4px 4px 0 rgba(0, 0, 0, 0.50);
 }

@@ -3,17 +3,22 @@
 import React, { memo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
+import cn from "classnames";
 
 import styles from "./LogoBig.module.css";
 
 interface ILogoBigProps {
   logoText?: string;
+  className?: string;
 }
 
-const LogoBig = ({ logoText = "Just Notes" }: ILogoBigProps): JSX.Element => {
+const LogoBig = ({
+  logoText = "Just Notes",
+  className,
+}: ILogoBigProps): JSX.Element => {
   return (
     <motion.div
-      className={styles.root}
+      className={cn(styles.root, className)}
       initial={{
         x: -200,
         opacity: 0,

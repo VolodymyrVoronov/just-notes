@@ -1,0 +1,38 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.label {
+  font-family: var(--poppins);
+  font-size: 22px;
+  line-height: 22px;
+
+  color: var(--black-light);
+}
+
+.input {
+  width: 100%;
+  min-height: 80px;
+
+  margin-top: 10px;
+  padding: 0 25px;
+
+  font-family: var(--poppins);
+  font-size: 22px;
+  line-height: 22px;
+
+  color: var(--black-light);
+
+  border: 2px solid var(--gray-lighter);
+  border-radius: 50px;
+
+  box-shadow: var(--box-shadow-small);
+}
+
+.input:focus {
+  background-color: var(--gray-lighter);
+}

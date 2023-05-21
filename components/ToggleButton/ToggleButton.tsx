@@ -18,13 +18,14 @@ const ToggleButton = ({
   text,
   active,
   onClick,
+  className,
 
   ...props
 }: IToggleButtonProps): JSX.Element => {
   return (
     <button
       onClick={onClick}
-      className={styles.root}
+      className={cn(styles.root, className)}
       disabled={active}
       type="button"
       aria-label={text}

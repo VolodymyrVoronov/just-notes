@@ -9,7 +9,7 @@
   background-color: var(--white);
 
   border-radius: 50px;
-  box-shadow: var(--box-shadow-1);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .word {
