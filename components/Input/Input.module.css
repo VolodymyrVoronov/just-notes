@@ -31,8 +31,12 @@
   border-radius: 50px;
 
   box-shadow: var(--box-shadow-small);
+
+  transition: all 250ms ease;
 }
 
 .input:focus {
-  background-color: var(--gray-lighter);
+  background-color: var(--gray-lighter-secondary);
+
+  transition: all 250ms ease;
 }
