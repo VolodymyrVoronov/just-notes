@@ -8,7 +8,6 @@ body {
 body {
   background-image: url("../../public/images/root-bg-01.png");
   background-size: cover;
-  background-position: top center;
 }
 
 * {
