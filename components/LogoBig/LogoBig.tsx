@@ -29,6 +29,7 @@ const LogoBig = ({
           duration: 1,
         },
       }}
+      aria-label={logoText}
     >
       {logoText.split(" ").map((word) => (
         <div key={uuidv4()} className={styles.word}>

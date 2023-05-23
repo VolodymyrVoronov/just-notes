@@ -2,6 +2,9 @@ import Image from "next/image";
 import { ButtonHTMLAttributes, DetailedHTMLProps, useState } from "react";
 import cn from "classnames";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEventListener } from "ahooks";
+
+import Key from "../../types/keys";
 
 import styles from "./Button.module.css";
 
@@ -30,6 +33,12 @@ const Button = ({
   ...props
 }: IButtonProps): JSX.Element => {
   const [isHovered, setIsHovered] = useState(false);
+
+  useEventListener("keydown", (e) => {
+    if (e.key === Key.Escape) {
+      setIsHovered(false);
+    }
+  });
 
   return (
     <button
