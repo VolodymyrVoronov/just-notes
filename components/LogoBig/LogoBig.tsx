@@ -32,7 +32,7 @@ const LogoBig = ({
       aria-label={logoText}
     >
       {logoText.split(" ").map((word) => (
-        <div key={uuidv4()} className={styles.word}>
+        <div key={uuidv4()} className={styles.word} aria-label={word}>
           {word.split("").map((letter) => (
             <span key={uuidv4()} className={styles.letter}>
               {letter}
