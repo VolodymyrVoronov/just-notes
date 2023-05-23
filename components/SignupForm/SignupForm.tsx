@@ -3,7 +3,7 @@
 import { ChangeEvent, useState, useRef, useEffect } from "react";
 import { useEventListener } from "ahooks";
 
-import { SignInFormState } from "../../types/form-state";
+import { SignUpFormState } from "../../types/form-state";
 import Key from "../../types/keys";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
@@ -11,19 +11,21 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ButtonShowPassword from "../ButtonShowPassword/ButtonShowPassword";
 
-import styles from "./SigninForm.module.css";
+import styles from "./SignupForm.module.css";
 
-interface ISigninFormProps {
+interface ISignupFormProps {
   className?: string;
 }
 
-const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
+const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
   const loginInputRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const [formData, setFormData] = useState<SignInFormState>({
+  const [formData, setFormData] = useState<SignUpFormState>({
     login: "",
     password: "",
+    confirmPassword: "",
   });
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -33,12 +35,16 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
     });
   };
 
-  const onSignInButtonClick = (): void => {
+  const onSignupButtonClick = (): void => {
     console.log(formData);
   };
 
   const onShowPasswordClick = (): void => {
     setShowPassword((prevState) => !prevState);
+  };
+
+  const onShowConfirmPasswordClick = (): void => {
+    setShowConfirmPassword((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -48,9 +54,11 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   useEventListener("keydown", (e) => {
     if (e.key === Key.Escape) {
       setShowPassword(false);
+      setShowConfirmPassword(false);
       setFormData({
         login: "",
         password: "",
+        confirmPassword: "",
       });
     }
   });
@@ -83,16 +91,35 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
         />
       </div>
 
+      <div className={styles["password-confirm-field-wrapper"]}>
+        <Input
+          onChange={onInputChange}
+          value={formData.confirmPassword}
+          className={styles["password-confirm-field"]}
+          labelText="Confirm password"
+          type={showConfirmPassword ? "text" : "password"}
+          name="confirmPassword"
+        />
+
+        <ButtonShowPassword
+          showPassword={showConfirmPassword}
+          password={formData.confirmPassword}
+          onClick={onShowConfirmPasswordClick}
+        />
+      </div>
+
       <Button
-        onClick={onSignInButtonClick}
-        className={styles["sign-in-button"]}
-        disabled={!formData.login || !formData.password}
-        text="Sign&nbsp;in"
+        onClick={onSignupButtonClick}
+        className={styles["sign-up-button"]}
+        disabled={
+          !formData.login || !formData.password || !formData.confirmPassword
+        }
+        text="Sign&nbsp;up"
         iconUrl="/icons/circle-arrow-01.svg"
-        aria-label="Sign in"
+        aria-label="Sign up"
       />
     </FormWrapper>
   );
 };
 
-export default SigninForm;
+export default SignupForm;

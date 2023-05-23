@@ -14,7 +14,7 @@
   transition: all 500ms ease;
 }
 
-.root:focus {
+.root:focus-visible {
   outline: var(--button-focus);
 }
 
@@ -30,6 +30,8 @@
 .root:disabled,
 .root-text-only:disabled {
   opacity: 0.5;
+
+  background-color: var(--black-light);
 
   cursor: default;
 

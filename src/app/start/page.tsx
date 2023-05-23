@@ -9,6 +9,7 @@ import { FormType, TForm } from "../../../types/form-variants";
 import LogoBig from "../../../components/LogoBig/LogoBig";
 import ToggleButtons from "../../../components/ToggleButtons/ToggleButtons";
 import SigninForm from "../../../components/SigninForm/SigninForm";
+import SignupForm from "../../../components/SignupForm/SignupForm";
 
 import styles from "./styles.module.css";
 
@@ -55,7 +56,7 @@ const StartPage: NextPage = (): JSX.Element => {
           }}
         >
           <AnimatePresence mode="wait">
-            {toggleFormType === FormType.signin ? (
+            {toggleFormType === FormType.signin && (
               <motion.div
                 key={toggleFormType}
                 initial={{
@@ -74,7 +75,9 @@ const StartPage: NextPage = (): JSX.Element => {
               >
                 <SigninForm className={styles["signin-form"]} />
               </motion.div>
-            ) : (
+            )}
+
+            {toggleFormType === FormType.signup && (
               <motion.div
                 key={toggleFormType}
                 initial={{
@@ -91,7 +94,7 @@ const StartPage: NextPage = (): JSX.Element => {
                   },
                 }}
               >
-                Signup
+                <SignupForm className={styles["signup-form"]} />
               </motion.div>
             )}
           </AnimatePresence>

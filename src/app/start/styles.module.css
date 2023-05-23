@@ -20,6 +20,7 @@
   flex-grow: 1;
 }
 
-.signin-form {
+.signin-form,
+.signup-form {
   margin-top: 50px;
 }
