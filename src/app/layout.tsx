@@ -3,6 +3,8 @@ import "../styles/globals.css";
 import "@fontsource/bungee-shade";
 import "@fontsource/poppins";
 
+import Providers from "./providers";
+
 export const metadata = {
   title: "Just Notes",
   description: "Create simple notes",
@@ -11,7 +13,9 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 };

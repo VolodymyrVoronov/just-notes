@@ -1,6 +1,8 @@
 "use client";
 
 import { ChangeEvent, useState, useRef, useEffect } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEventListener } from "ahooks";
 
 import { SignInFormState } from "../../types/form-state";
@@ -18,6 +20,8 @@ interface ISigninFormProps {
 }
 
 const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
+  const router = useRouter();
+
   const loginInputRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,8 +37,23 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
     });
   };
 
-  const onSignInButtonClick = (): void => {
-    console.log(formData);
+  const onSignInButtonClick = async (): Promise<void> => {
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        callbackUrl: "/notes",
+        login: formData.login,
+        password: formData.password,
+      });
+
+      if (!res?.error) {
+        router.push("/notes");
+      } else {
+        console.log("res", res);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   const onShowPasswordClick = (): void => {

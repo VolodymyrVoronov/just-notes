@@ -1,8 +1,20 @@
-import { NextPage } from "next";
-import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
 
-const MainPage: NextPage = (): JSX.Element => {
-  return <div>MainPage</div>;
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
+import { LoginButton, LogoutButton } from "../auth";
+
+const NotesPage = async () => {
+  const session = await getServerSession(authOptions);
+
+  return (
+    <div>
+      NotesPage
+      <LogoutButton />
+      <LoginButton />
+    </div>
+  );
 };
 
-export default MainPage;
+export default NotesPage;

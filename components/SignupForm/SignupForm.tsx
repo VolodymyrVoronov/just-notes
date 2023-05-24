@@ -1,6 +1,7 @@
 "use client";
 
 import { ChangeEvent, useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useEventListener } from "ahooks";
 
 import { SignUpFormState } from "../../types/form-state";
@@ -18,9 +19,12 @@ interface ISignupFormProps {
 }
 
 const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
+  const router = useRouter();
+
   const loginInputRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState<SignUpFormState>({
     login: "",
@@ -35,8 +39,36 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
     });
   };
 
-  const onSignupButtonClick = (): void => {
-    console.log(formData);
+  const onSignupButtonClick = async (): Promise<void> => {
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setLoading(false);
+      if (!res.ok) {
+        console.log("res not ok", res);
+
+        return;
+      }
+
+      router.push("/start");
+
+      setFormData({
+        login: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error: any) {
+      setLoading(false);
+      console.log("error", error);
+    }
   };
 
   const onShowPasswordClick = (): void => {

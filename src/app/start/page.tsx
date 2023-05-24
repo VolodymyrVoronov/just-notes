@@ -1,7 +1,9 @@
 "use client";
 
 import { NextPage } from "next";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { FormType, TForm } from "../../../types/form-variants";
@@ -14,6 +16,9 @@ import SignupForm from "../../../components/SignupForm/SignupForm";
 import styles from "./styles.module.css";
 
 const StartPage: NextPage = (): JSX.Element => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const [toggleFormType, setToggleFormType] = useState<TForm>(FormType.signin);
 
   const getToggleStatus = (flag: TForm) => {
@@ -21,6 +26,13 @@ const StartPage: NextPage = (): JSX.Element => {
   };
 
   console.log(toggleFormType);
+  console.log("session", session);
+
+  useEffect(() => {
+    if (session) {
+      router.push("/notes");
+    }
+  }, [router, session]);
 
   return (
     <div className={styles.root}>
