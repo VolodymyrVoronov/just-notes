@@ -158,7 +158,10 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
         onClick={onSignupButtonClick}
         className={styles["sign-up-button"]}
         disabled={
-          !formData.login || !formData.password || !formData.confirmPassword
+          !formData.login ||
+          !formData.password ||
+          !formData.confirmPassword ||
+          loading
         }
         text={loading ? "Loading..." : "Sign up"}
         iconUrl="/icons/circle-arrow-01.svg"
