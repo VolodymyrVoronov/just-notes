@@ -20,6 +20,11 @@ interface ISigninFormProps {
   className?: string;
 }
 
+const formDataInitialState: SignInFormState = {
+  login: "",
+  password: "",
+};
+
 const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   const router = useRouter();
 
@@ -29,10 +34,8 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [formData, setFormData] = useState<SignInFormState>({
-    login: "",
-    password: "",
-  });
+  const [formData, setFormData] =
+    useState<SignInFormState>(formDataInitialState);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (errorMessage) setErrorMessage("");
@@ -84,10 +87,7 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
     if (e.key === Key.Escape) {
       if (errorMessage) setErrorMessage("");
       setShowPassword(false);
-      setFormData({
-        login: "",
-        password: "",
-      });
+      setFormData(formDataInitialState);
     }
   });
 

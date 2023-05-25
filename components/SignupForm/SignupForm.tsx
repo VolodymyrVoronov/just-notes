@@ -19,6 +19,12 @@ interface ISignupFormProps {
   className?: string;
 }
 
+const formDataInitialState: SignUpFormState = {
+  login: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
   const router = useRouter();
 
@@ -27,11 +33,8 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [formData, setFormData] = useState<SignUpFormState>({
-    login: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [formData, setFormData] =
+    useState<SignUpFormState>(formDataInitialState);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -62,11 +65,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
 
       router.push(Path.start);
 
-      setFormData({
-        login: "",
-        password: "",
-        confirmPassword: "",
-      });
+      setFormData(formDataInitialState);
     } catch (error) {
       setLoading(false);
       console.log("error", error);
@@ -89,11 +88,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
     if (e.key === Key.Escape) {
       setShowPassword(false);
       setShowConfirmPassword(false);
-      setFormData({
-        login: "",
-        password: "",
-        confirmPassword: "",
-      });
+      setFormData(formDataInitialState);
     }
   });
 
@@ -148,7 +143,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
         disabled={
           !formData.login || !formData.password || !formData.confirmPassword
         }
-        text="Sign&nbsp;up"
+        text={loading ? "Loading..." : "Sign up"}
         iconUrl="/icons/circle-arrow-01.svg"
         aria-label="Sign up"
       />
