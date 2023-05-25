@@ -7,6 +7,7 @@ import { useEventListener } from "ahooks";
 import { SignUpFormState } from "../../types/form-state";
 import Key from "../../types/keys";
 import Path from "../../types/paths";
+import HttpMethod from "../../types/httpMethod";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
@@ -55,7 +56,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
 
     try {
       const res = await fetch("/api/register", {
-        method: "POST",
+        method: HttpMethod.POST,
         body: JSON.stringify(formData),
         headers: {
           "Content-Type": "application/json",
