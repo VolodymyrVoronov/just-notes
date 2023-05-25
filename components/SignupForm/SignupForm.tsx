@@ -66,7 +66,13 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
       setLoading(false);
 
       if (!res.ok) {
-        setErrorMessage(JSON.parse(await res.text()).message);
+        const dataRes: unknown = JSON.parse(await res.text());
+
+        if (typeof dataRes === "object" && dataRes && "message" in dataRes) {
+          const msg = dataRes.message as string;
+
+          setErrorMessage(msg);
+        }
 
         return;
       }
