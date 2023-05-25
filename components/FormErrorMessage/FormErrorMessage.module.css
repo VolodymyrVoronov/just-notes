@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.message {
+  font-family: var(--poppins);
+  font-size: 18px;
+  line-height: 18px;
+
+  color: tomato;
+}

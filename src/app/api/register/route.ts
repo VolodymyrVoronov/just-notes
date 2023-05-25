@@ -31,7 +31,7 @@ export const POST = async (req: Request) => {
     return new NextResponse(
       JSON.stringify({
         status: "error",
-        message: error.message,
+        message: "User already exists",
       }),
       { status: 500 }
     );

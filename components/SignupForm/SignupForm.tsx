@@ -12,6 +12,7 @@ import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ButtonShowPassword from "../ButtonShowPassword/ButtonShowPassword";
+import FormErrorMessage from "../FormErrorMessage/FormErrorMessage";
 
 import styles from "./SignupForm.module.css";
 
@@ -29,14 +30,18 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
   const router = useRouter();
 
   const loginInputRef = useRef<HTMLInputElement>(null);
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] =
     useState<SignUpFormState>(formDataInitialState);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (errorMessage) setErrorMessage("");
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),
@@ -45,6 +50,8 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
 
   const onSignupButtonClick = async (): Promise<void> => {
     setLoading(true);
+
+    if (errorMessage) setErrorMessage("");
 
     try {
       const res = await fetch("/api/register", {
@@ -58,7 +65,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
       setLoading(false);
 
       if (!res.ok) {
-        console.log("res not ok", res);
+        setErrorMessage(JSON.parse(await res.text()).message);
 
         return;
       }
@@ -68,7 +75,9 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
       setFormData(formDataInitialState);
     } catch (error) {
       setLoading(false);
-      console.log("error", error);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
     }
   };
 
@@ -86,6 +95,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
 
   useEventListener("keydown", (e) => {
     if (e.key === Key.Escape) {
+      if (errorMessage) setErrorMessage("");
       setShowPassword(false);
       setShowConfirmPassword(false);
       setFormData(formDataInitialState);
@@ -146,6 +156,11 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
         text={loading ? "Loading..." : "Sign up"}
         iconUrl="/icons/circle-arrow-01.svg"
         aria-label="Sign up"
+      />
+
+      <FormErrorMessage
+        className={styles["error-message-block"]}
+        errorMessage={errorMessage}
       />
     </FormWrapper>
   );

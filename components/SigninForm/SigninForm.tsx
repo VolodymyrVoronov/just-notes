@@ -13,6 +13,7 @@ import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import ButtonShowPassword from "../ButtonShowPassword/ButtonShowPassword";
+import FormErrorMessage from "../FormErrorMessage/FormErrorMessage";
 
 import styles from "./SigninForm.module.css";
 
@@ -126,6 +127,11 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
         text={loading ? "Loading..." : "Sign in"}
         iconUrl="/icons/circle-arrow-01.svg"
         aria-label="Sign in"
+      />
+
+      <FormErrorMessage
+        className={styles["error-message-block"]}
+        errorMessage={errorMessage}
       />
     </FormWrapper>
   );
