@@ -7,6 +7,7 @@ import { useEventListener } from "ahooks";
 
 import { SignInFormState } from "../../types/form-state";
 import Key from "../../types/keys";
+import Path from "../../types/paths";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
@@ -23,7 +24,10 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   const router = useRouter();
 
   const loginInputRef = useRef<HTMLInputElement>(null);
+
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState<SignInFormState>({
     login: "",
@@ -31,6 +35,8 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   });
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (errorMessage) setErrorMessage("");
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),
@@ -38,21 +44,31 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
   };
 
   const onSignInButtonClick = async (): Promise<void> => {
+    setLoading(true);
+
+    if (errorMessage) setErrorMessage("");
+
     try {
       const res = await signIn("credentials", {
         redirect: false,
-        callbackUrl: "/notes",
+        callbackUrl: Path.notes,
         login: formData.login,
         password: formData.password,
       });
 
+      setLoading(false);
+
       if (!res?.error) {
-        router.push("/notes");
+        router.push(Path.notes);
       } else {
-        console.log("res", res);
+        setErrorMessage("Invalid login or password");
       }
     } catch (error) {
-      console.log("error", error);
+      setLoading(false);
+
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
     }
   };
 
@@ -66,6 +82,7 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
 
   useEventListener("keydown", (e) => {
     if (e.key === Key.Escape) {
+      if (errorMessage) setErrorMessage("");
       setShowPassword(false);
       setFormData({
         login: "",
@@ -105,8 +122,8 @@ const SigninForm = ({ className }: ISigninFormProps): JSX.Element => {
       <Button
         onClick={onSignInButtonClick}
         className={styles["sign-in-button"]}
-        disabled={!formData.login || !formData.password}
-        text="Sign&nbsp;in"
+        disabled={!formData.login || !formData.password || loading}
+        text={loading ? "Loading..." : "Sign in"}
         iconUrl="/icons/circle-arrow-01.svg"
         aria-label="Sign in"
       />

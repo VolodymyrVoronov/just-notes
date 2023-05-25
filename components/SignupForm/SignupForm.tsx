@@ -6,6 +6,7 @@ import { useEventListener } from "ahooks";
 
 import { SignUpFormState } from "../../types/form-state";
 import Key from "../../types/keys";
+import Path from "../../types/paths";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
@@ -52,20 +53,21 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
       });
 
       setLoading(false);
+
       if (!res.ok) {
         console.log("res not ok", res);
 
         return;
       }
 
-      router.push("/start");
+      router.push(Path.start);
 
       setFormData({
         login: "",
         password: "",
         confirmPassword: "",
       });
-    } catch (error: any) {
+    } catch (error) {
       setLoading(false);
       console.log("error", error);
     }

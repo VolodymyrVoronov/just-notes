@@ -1,20 +1,16 @@
+"use client";
+
 import { getServerSession } from "next-auth";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
-import { LoginButton, LogoutButton } from "../auth";
+const NotesPage = () => {
+  const session = useSession();
 
-const NotesPage = async () => {
-  const session = await getServerSession(authOptions);
+  console.log("session", session);
 
-  return (
-    <div>
-      NotesPage
-      <LogoutButton />
-      <LoginButton />
-    </div>
-  );
+  return <div>NotesPage</div>;
 };
 
 export default NotesPage;

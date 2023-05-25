@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { FormType, TForm } from "../../../types/form-variants";
+import Path from "../../../types/paths";
 
 import LogoBig from "../../../components/LogoBig/LogoBig";
 import ToggleButtons from "../../../components/ToggleButtons/ToggleButtons";
@@ -25,12 +26,9 @@ const StartPage: NextPage = (): JSX.Element => {
     setToggleFormType(flag);
   };
 
-  console.log(toggleFormType);
-  console.log("session", session);
-
   useEffect(() => {
     if (session) {
-      router.push("/notes");
+      router.push(Path.notes);
     }
   }, [router, session]);
 
