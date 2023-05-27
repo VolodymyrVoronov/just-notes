@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+
+  margin: 50px;
+
+  background-color: var(--white);
+
+  box-shadow: var(--box-shadow-medium);
+  border-radius: 50px;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 150px;
+
+  padding: 50px 0;
+
+  border-right: 2px solid var(--gray-lighter-third)
+}
+
+.right-side {
+  padding: 50px;
+}

@@ -36,7 +36,7 @@
 }
 
 .input:focus {
-  background-color: var(--gray-lighter-secondary);
+  background-color: var(--gray-lighter-second);
 
   transition: all 250ms ease;
 }
