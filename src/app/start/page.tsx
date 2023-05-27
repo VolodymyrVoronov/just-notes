@@ -35,7 +35,24 @@ const StartPage: NextPage = (): JSX.Element => {
   return (
     <div className={styles.root}>
       {session === undefined || session ? (
-        <div className={styles.loading}>Loading...</div>
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          exit={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: {
+              duration: 0.5,
+              ease: "easeInOut",
+            },
+          }}
+          className={styles.loading}
+        >
+          Loading...
+        </motion.div>
       ) : (
         <>
           <div className={styles["left-side"]}>

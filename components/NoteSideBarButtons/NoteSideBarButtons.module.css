@@ -1,0 +1,72 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.note-buttons {
+
+  margin-top: 50px;
+}
+
+.note-button-wrapper {
+  margin-bottom: 40px;
+}
+
+.note-button-wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.note-button {
+  padding: 15px;
+}
+
+.note-button:hover {
+  scale: 1.5;
+}
+
+.note-button span {
+  display: none;
+}
+
+.note-button-orange {
+  background-color: var(--orange);
+}
+
+.note-button-yellow {
+  background-color: var(--yellow);
+}
+
+.note-button-purple {
+  background-color: var(--purple);
+}
+
+.note-button-blue {
+  background-color: var(--blue);
+}
+
+.note-button-lime {
+  background-color: var(--lime);
+}
+
+.note-button-orange:hover {
+  background-color: var(--orange-hover);
+}
+
+.note-button-yellow:hover {
+  background-color: var(--yellow-hover);
+}
+
+.note-button-purple:hover {
+  background-color: var(--purple-hover);
+}
+
+.note-button-blue:hover {
+  background-color: var(--blue-hover);
+}
+
+.note-button-lime:hover {
+  background-color: var(--lime-hover);
+}

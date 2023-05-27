@@ -1,10 +1,8 @@
 "use client";
 
 import { getServerSession } from "next-auth";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { authOptions } from "../api/auth/[...nextauth]/route";
 
 import SideBar from "../../../components/SideBar/SideBar";
 
@@ -14,6 +12,18 @@ const NotesPage = () => {
   const session = useSession();
 
   console.log("session", session);
+
+  const onAddNoteButtonClick = (color: string): void => {
+    console.log("color", color);
+  };
+
+  const onFavoritesNotesButtonClick = (): void => {
+    console.log("onFavoritesNotesButtonClick");
+  };
+
+  const onSignOutButtonClick = (): void => {
+    signOut();
+  };
 
   return (
     <motion.div
@@ -33,8 +43,13 @@ const NotesPage = () => {
       className={styles.root}
     >
       <div className={styles["left-side"]}>
-        <SideBar />
+        <SideBar
+          onAddNoteButtonClick={onAddNoteButtonClick}
+          onFavoritesNotesButtonClick={onFavoritesNotesButtonClick}
+          onSignOutButtonClick={onSignOutButtonClick}
+        />
       </div>
+
       <div className={styles["right-side"]}>Right</div>
     </motion.div>
   );

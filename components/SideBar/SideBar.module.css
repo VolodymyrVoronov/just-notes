@@ -2,25 +2,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  height: 100%;
 }
 
 .add-note-button {
-  padding: 10px;
   margin-top: 50px;
+  padding: 15px;
+}
+
+.add-note-button:hover {
+  scale: 1.1;
 }
 
 .add-note-button img {
   transition: all 0.3s ease-in-out;
 }
 
-.add-note-button:hover img {
+.add-note-button--active {
+  scale: 1.1;
+}
+
+.add-note-button:hover img,
+.add-note-button--active img {
   transform: rotate(135deg);
 
   transition: all 0.3s ease-in-out;
 }
 
-.add-note-button:focus-visible img {
-  transform: rotate(135deg);
+.footer-buttons {
+  margin-top: auto;
+}
 
-  transition: all 0.3s ease-in-out;
+.favorite-notes-button {
+  padding: 15px;
+}
+
+.sign-out-button {
+  margin-top: 30px;
+  padding: 15px;
 }

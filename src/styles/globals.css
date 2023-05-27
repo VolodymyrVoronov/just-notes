@@ -34,6 +34,13 @@ body {
   --lime: #E4EE90;
   --gold: #FDCB04;
 
+  --orange-hover: #f8aa8b;
+  --yellow-hover: #fcd18c;
+  --purple-hover: #c4a8fc;
+  --blue-hover: #7ed9eb;
+  --lime-hover: #e6ebb9;
+  --gold-hover: #f5de83;
+
   --poppins: "Poppins", sans-serif;
   --bungee-shade: "Bungee Shade", cursive;
 
