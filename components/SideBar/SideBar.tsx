@@ -1,6 +1,7 @@
-import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
+import { useClickAway } from "ahooks";
 
 import LogoSmall from "../LogoSmall/LogoSmall";
 import Button from "../Button/Button";
@@ -23,12 +24,18 @@ const SideBar = ({
 
   ...props
 }: ISideBarProps): JSX.Element => {
+  const ref = useRef<HTMLButtonElement>(null);
+
   const [showNotesIcons, setShowNotesIcons] = useState(false);
 
   const onAddNoteButtonClickHandler = (color: string): void => {
     onAddNoteButtonClick(color);
     setShowNotesIcons(false);
   };
+
+  useClickAway(() => {
+    setShowNotesIcons(false);
+  }, ref);
 
   return (
     <div className={cn(styles.root, className)} {...props}>
@@ -50,6 +57,7 @@ const SideBar = ({
         }}
       >
         <Button
+          ref={ref}
           onClick={() => setShowNotesIcons(!showNotesIcons)}
           className={cn(styles["add-note-button"], {
             [styles["add-note-button--active"]]: showNotesIcons,
