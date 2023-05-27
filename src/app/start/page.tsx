@@ -45,6 +45,7 @@ const StartPage: NextPage = (): JSX.Element => {
           animate={{
             opacity: 1,
             transition: {
+              delay: 1,
               duration: 0.5,
               ease: "easeInOut",
             },
