@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-note-button {
+  padding: 10px;
+  margin-top: 50px;
+}
+
+.add-note-button img {
+  transition: all 0.3s ease-in-out;
+}
+
+.add-note-button:hover img {
+  transform: rotate(135deg);
+
+  transition: all 0.3s ease-in-out;
+}
+
+.add-note-button:focus-visible img {
+  transform: rotate(135deg);
+
+  transition: all 0.3s ease-in-out;
+}

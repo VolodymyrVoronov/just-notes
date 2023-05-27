@@ -1,0 +1,7 @@
+.root {
+  font-family: var(--bungee-shade);
+  font-size: 60px;
+  line-height: 60px;
+
+  color: var(--black-light);
+}

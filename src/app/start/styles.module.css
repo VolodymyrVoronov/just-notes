@@ -7,6 +7,26 @@
   padding: 50px;
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+
+  margin: auto;
+  padding: 50px;
+
+  font-family: var(--poppins);
+  font-size: 36px;
+  line-height: 36px;
+  letter-spacing: 5px;
+
+  background-color: var(--white);
+
+  box-shadow: var(--box-shadow-medium);
+  border-radius: 50px;
+}
+
 .left-side {
   display: flex;
   align-items: center;

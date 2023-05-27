@@ -34,82 +34,88 @@ const StartPage: NextPage = (): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      <div className={styles["left-side"]}>
-        <LogoBig />
-      </div>
-      <div className={styles["right-side"]}>
-        <ToggleButtons
-          toggleStatusSwitch={getToggleStatus}
-          leftButton="Sign in"
-          rightButton="Sign up"
-        />
+      {session === undefined || session ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <>
+          <div className={styles["left-side"]}>
+            <LogoBig />
+          </div>
+          <div className={styles["right-side"]}>
+            <ToggleButtons
+              toggleStatusSwitch={getToggleStatus}
+              leftButton="Sign in"
+              rightButton="Sign up"
+            />
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.5,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            transition: {
-              delay: 0.05,
-              duration: 1,
-              ease: [0, 0.71, 0.2, 1.01],
-              scale: {
-                type: "spring",
-                damping: 5,
-                stiffness: 100,
-                restDelta: 0.001,
-              },
-            },
-          }}
-        >
-          <AnimatePresence mode="wait">
-            {toggleFormType === FormType.signin && (
-              <motion.div
-                key={toggleFormType}
-                initial={{
-                  opacity: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                  transition: {
-                    duration: 0.5,
-                    ease: "easeInOut",
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 0.5,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                transition: {
+                  delay: 0.05,
+                  duration: 1,
+                  ease: [0, 0.71, 0.2, 1.01],
+                  scale: {
+                    type: "spring",
+                    damping: 5,
+                    stiffness: 100,
+                    restDelta: 0.001,
                   },
-                }}
-              >
-                <SigninForm className={styles["signin-form"]} />
-              </motion.div>
-            )}
+                },
+              }}
+            >
+              <AnimatePresence mode="wait">
+                {toggleFormType === FormType.signin && (
+                  <motion.div
+                    key={toggleFormType}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        ease: "easeInOut",
+                      },
+                    }}
+                  >
+                    <SigninForm className={styles["signin-form"]} />
+                  </motion.div>
+                )}
 
-            {toggleFormType === FormType.signup && (
-              <motion.div
-                key={toggleFormType}
-                initial={{
-                  opacity: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: 1,
-                  transition: {
-                    duration: 0.5,
-                    ease: "easeInOut",
-                  },
-                }}
-              >
-                <SignupForm className={styles["signup-form"]} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      </div>
+                {toggleFormType === FormType.signup && (
+                  <motion.div
+                    key={toggleFormType}
+                    initial={{
+                      opacity: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        duration: 0.5,
+                        ease: "easeInOut",
+                      },
+                    }}
+                  >
+                    <SignupForm className={styles["signup-form"]} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

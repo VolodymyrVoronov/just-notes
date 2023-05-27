@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
+import SideBar from "../../../components/SideBar/SideBar";
+
 import styles from "./styles.module.css";
 
 const NotesPage = () => {
@@ -30,7 +32,9 @@ const NotesPage = () => {
       }}
       className={styles.root}
     >
-      <div className={styles["left-side"]}>Left</div>
+      <div className={styles["left-side"]}>
+        <SideBar />
+      </div>
       <div className={styles["right-side"]}>Right</div>
     </motion.div>
   );
