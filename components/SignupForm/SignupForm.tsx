@@ -50,9 +50,17 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
   };
 
   const onSignupButtonClick = async (): Promise<void> => {
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage("Passwords do not match");
+
+      return;
+    }
+
     setLoading(true);
 
-    if (errorMessage) setErrorMessage("");
+    if (errorMessage) {
+      setErrorMessage("");
+    }
 
     try {
       const res = await fetch("/api/register", {
