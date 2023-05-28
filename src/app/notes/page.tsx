@@ -5,7 +5,7 @@ import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
 import HttpMethod from "../../../types/httpMethod";
-import INotes from "../../../types/notes";
+import INote from "../../../types/note";
 
 import SideBar from "../../../components/SideBar/SideBar";
 import SearchInput from "../../../components/SearchInput/SearchInput";
@@ -16,7 +16,7 @@ import styles from "./styles.module.css";
 const NotesPage = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [notes, setNotes] = useState<INotes[]>([]);
+  const [notes, setNotes] = useState<INote[]>([]);
   const [searchedNote, setSearchedNote] = useState<string>("");
 
   const onAddNoteButtonClick = useCallback((color: string): void => {
@@ -105,7 +105,7 @@ const NotesPage = () => {
         const dataRes: unknown = JSON.parse(await res.text());
 
         if (typeof dataRes === "object" && dataRes && "data" in dataRes) {
-          const data = dataRes.data as { notes: INotes[] };
+          const data = dataRes.data as { notes: INote[] };
 
           setNotes(data.notes);
         }

@@ -1,13 +1,15 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 import cn from "classnames";
 
-import INotes from "../../types/notes";
+import INote from "../../types/note";
+
+import Note from "../Note/Note";
 
 import styles from "./Notes.module.css";
 
 interface INotesProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  notes: INotes[];
+  notes: INote[];
 
   className?: string;
 }
@@ -15,8 +17,8 @@ interface INotesProps
 const Notes = ({ notes, className, ...props }: INotesProps): JSX.Element => {
   return (
     <div className={cn(styles.root, className)} {...props}>
-      {notes.map(({ id, note, color }) => (
-        <div key={id}>{note}</div>
+      {notes.map((note) => (
+        <Note key={note.id} noteData={note} />
       ))}
     </div>
   );

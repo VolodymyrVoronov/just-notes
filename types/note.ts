@@ -1,6 +1,6 @@
 import Color from "./color";
 
-interface INotes {
+interface INote {
   id: number;
   note: string;
   color: keyof typeof Color;
@@ -14,4 +14,4 @@ interface INotes {
   userId: number;
 }
 
-export default INotes;
+export default INote;

@@ -137,7 +137,11 @@ const SideBar = ({
                   ? "/icons/star-yellow-01.svg"
                   : "/icons/star-white-01.svg"
               }
-              aria-label="Show favorites notes"
+              aria-label={
+                anyFavoriteNotes
+                  ? "Show favorites notes"
+                  : "You do not have any favorites notes yet"
+              }
               iconHeight={20}
               iconWidth={20}
               disabled={loading || anyFavoriteNotes}

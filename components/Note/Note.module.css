@@ -1,0 +1,52 @@
+.root {
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+  height: 300px;
+
+  padding: 25px;
+
+  box-shadow: var(--box-shadow-small);
+  border-radius: 25px;
+}
+
+.root-orange {
+  background-color: var(--orange);
+}
+
+.root-yellow {
+  background-color: var(--yellow);
+}
+
+.root-purple {
+  background-color: var(--purple);
+}
+
+.root-blue {
+  background-color: var(--blue);
+}
+
+.root-lime {
+  background-color: var(--lime);
+}
+
+.root-orange:hover {
+  background-color: var(--orange-hover);
+}
+
+.root-yellow:hover {
+  background-color: var(--yellow-hover);
+}
+
+.root-purple:hover {
+  background-color: var(--purple-hover);
+}
+
+.root-blue:hover {
+  background-color: var(--blue-hover);
+}
+
+.root-lime:hover {
+  background-color: var(--lime-hover);
+}
