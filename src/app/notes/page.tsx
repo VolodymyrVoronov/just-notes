@@ -1,23 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getServerSession } from "next-auth";
-import { signOut, useSession } from "next-auth/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { signOut } from "next-auth/react";
+import { motion } from "framer-motion";
 
 import HttpMethod from "../../../types/httpMethod";
+import INotes from "../../../types/notes";
 
 import SideBar from "../../../components/SideBar/SideBar";
 
 import styles from "./styles.module.css";
 
 const NotesPage = () => {
-  const session = useSession();
-
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  console.log("session", session);
+  const [notes, setNotes] = useState<INotes[]>([]);
 
   const onAddNoteButtonClick = (color: string): void => {
     console.log("color", color);
@@ -63,8 +60,8 @@ const NotesPage = () => {
     }
   };
 
-  const onFavoritesNotesButtonClick = (): void => {
-    console.log("onFavoritesNotesButtonClick");
+  const onFavoriteNotesButtonClick = (): void => {
+    console.log("onFavoriteNotesButtonClick");
   };
 
   const onSignOutButtonClick = (): void => {
@@ -99,9 +96,9 @@ const NotesPage = () => {
           const dataRes: unknown = JSON.parse(await res.text());
 
           if (typeof dataRes === "object" && dataRes && "data" in dataRes) {
-            const data = dataRes.data as { notes: string[] };
+            const data = dataRes.data as { notes: INotes[] };
 
-            console.log("data", data.notes);
+            setNotes(data.notes);
           }
         }
       } catch (error) {
@@ -135,7 +132,7 @@ const NotesPage = () => {
       <div className={styles["left-side"]}>
         <SideBar
           onAddNoteButtonClick={onAddNoteButtonClick}
-          onFavoritesNotesButtonClick={onFavoritesNotesButtonClick}
+          onFavoriteNotesButtonClick={onFavoriteNotesButtonClick}
           onSignOutButtonClick={onSignOutButtonClick}
           loading={loading}
         />

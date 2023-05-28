@@ -18,13 +18,16 @@
   justify-content: flex-start;
   align-items: center;
 
-  width: 150px;
-
-  padding: 50px 0;
+  padding: 50px 25px;
 
   border-right: 2px solid var(--gray-lighter-third)
 }
 
 .right-side {
+  display: flex;
+  flex-direction: column;
+
+  width: calc(100% - 100px);
+
   padding: 50px;
 }

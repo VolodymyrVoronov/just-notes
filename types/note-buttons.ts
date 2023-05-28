@@ -1,12 +1,6 @@
-export enum ButtonColor {
-  orange = "orange",
-  yellow = "yellow",
-  purple = "purple",
-  blue = "blue",
-  lime = "lime",
-}
+import Color from "./color";
 
 export interface INoteButton {
   id: number;
-  color: keyof typeof ButtonColor;
+  color: keyof typeof Color;
 }

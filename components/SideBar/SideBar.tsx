@@ -12,14 +12,14 @@ import styles from "./SideBar.module.css";
 interface ISideBarProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   onAddNoteButtonClick: (color: string) => void;
-  onFavoritesNotesButtonClick: () => void;
+  onFavoriteNotesButtonClick: () => void;
   onSignOutButtonClick: () => void;
   loading: boolean;
 }
 
 const SideBar = ({
   onAddNoteButtonClick,
-  onFavoritesNotesButtonClick,
+  onFavoriteNotesButtonClick,
   onSignOutButtonClick,
   loading,
   className,
@@ -95,7 +95,7 @@ const SideBar = ({
         className={styles["footer-buttons"]}
       >
         <Button
-          onClick={onFavoritesNotesButtonClick}
+          onClick={onFavoriteNotesButtonClick}
           className={cn(styles["favorite-notes-button"])}
           hasText={false}
           iconUrl="/icons/star-white-01.svg"

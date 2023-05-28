@@ -2,7 +2,8 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import cn from "classnames";
 
-import { INoteButton, ButtonColor } from "../../types/note-buttons";
+import { INoteButton } from "../../types/note-buttons";
+import Color from "../../types/color";
 
 import styles from "./NoteSideBarButtons.module.css";
 import Button from "../Button/Button";
@@ -16,23 +17,23 @@ interface INotesSideBarButtonsProps
 const noteButtons: INoteButton[] = [
   {
     id: 1,
-    color: ButtonColor.orange,
+    color: Color.orange,
   },
   {
     id: 2,
-    color: ButtonColor.yellow,
+    color: Color.yellow,
   },
   {
     id: 3,
-    color: ButtonColor.purple,
+    color: Color.purple,
   },
   {
     id: 4,
-    color: ButtonColor.blue,
+    color: Color.blue,
   },
   {
     id: 5,
-    color: ButtonColor.lime,
+    color: Color.lime,
   },
 ];
 
@@ -76,14 +77,11 @@ const NotesSideBarButtons = ({
                 <Button
                   onClick={() => onAddNoteButtonClick(color)}
                   className={cn(styles["note-button"], {
-                    [styles["note-button-orange"]]:
-                      color === ButtonColor.orange,
-                    [styles["note-button-yellow"]]:
-                      color === ButtonColor.yellow,
-                    [styles["note-button-purple"]]:
-                      color === ButtonColor.purple,
-                    [styles["note-button-blue"]]: color === ButtonColor.blue,
-                    [styles["note-button-lime"]]: color === ButtonColor.lime,
+                    [styles["note-button-orange"]]: color === Color.orange,
+                    [styles["note-button-yellow"]]: color === Color.yellow,
+                    [styles["note-button-purple"]]: color === Color.purple,
+                    [styles["note-button-blue"]]: color === Color.blue,
+                    [styles["note-button-lime"]]: color === Color.lime,
                   })}
                   hasText={false}
                   hasIcon={false}
