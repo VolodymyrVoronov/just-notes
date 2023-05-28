@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
 import { useClickAway } from "ahooks";
 
@@ -21,6 +21,7 @@ interface ISideBarProps
   onFavoriteNotesButtonClick: () => void;
   onSignOutButtonClick: () => void;
   loading: boolean;
+  anyFavoriteNotes: boolean;
 }
 
 const SideBar = ({
@@ -28,6 +29,7 @@ const SideBar = ({
   onFavoriteNotesButtonClick,
   onSignOutButtonClick,
   loading,
+  anyFavoriteNotes,
   className,
 
   ...props
@@ -35,10 +37,16 @@ const SideBar = ({
   const ref = useRef<HTMLButtonElement>(null);
 
   const [showNotesIcons, setShowNotesIcons] = useState(false);
+  const [showFavoriteNotes, setShowFavoriteNotes] = useState(false);
 
   const onAddNoteButtonClickHandler = (color: string): void => {
     onAddNoteButtonClick(color);
     setShowNotesIcons(false);
+  };
+
+  const onShowFavoriteNotesButtonClick = (): void => {
+    onFavoriteNotesButtonClick();
+    setShowFavoriteNotes((prev) => !prev);
   };
 
   useClickAway(() => {
@@ -100,16 +108,42 @@ const SideBar = ({
         }}
         className={styles["footer-buttons"]}
       >
-        <Button
-          onClick={onFavoriteNotesButtonClick}
-          className={cn(styles["favorite-notes-button"])}
-          hasText={false}
-          iconUrl="/icons/star-white-01.svg"
-          aria-label="Show favorites notes"
-          iconHeight={20}
-          iconWidth={20}
-          disabled={loading}
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={String(showFavoriteNotes)}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 0.5,
+              },
+            }}
+            exit={{
+              opacity: 0,
+              transition: {
+                duration: 0.5,
+              },
+            }}
+            className={styles["note-button-wrapper"]}
+          >
+            <Button
+              onClick={onShowFavoriteNotesButtonClick}
+              className={cn(styles["favorite-notes-button"])}
+              hasText={false}
+              iconUrl={
+                showFavoriteNotes
+                  ? "/icons/star-yellow-01.svg"
+                  : "/icons/star-white-01.svg"
+              }
+              aria-label="Show favorites notes"
+              iconHeight={20}
+              iconWidth={20}
+              disabled={loading || anyFavoriteNotes}
+            />
+          </motion.div>
+        </AnimatePresence>
 
         <Button
           onClick={onSignOutButtonClick}

@@ -9,6 +9,7 @@ import INotes from "../../../types/notes";
 
 import SideBar from "../../../components/SideBar/SideBar";
 import SearchInput from "../../../components/SearchInput/SearchInput";
+import Notes from "../../../components/Notes/Notes";
 
 import styles from "./styles.module.css";
 
@@ -142,12 +143,13 @@ const NotesPage = () => {
           onFavoriteNotesButtonClick={onFavoriteNotesButtonClick}
           onSignOutButtonClick={onSignOutButtonClick}
           loading={loading}
+          anyFavoriteNotes={!notes.some((note) => note.favorite)}
         />
       </div>
 
       <div className={styles["right-side"]}>
         <motion.div
-          className={styles.searchInput}
+          className={styles["search-input"]}
           initial={{
             x: -50,
             opacity: 0,
@@ -171,7 +173,7 @@ const NotesPage = () => {
         </motion.div>
 
         <motion.span
-          className={styles.notesTitle}
+          className={styles["notes-title"]}
           initial={{
             x: -50,
             opacity: 0,
@@ -188,6 +190,8 @@ const NotesPage = () => {
         >
           Notes
         </motion.span>
+
+        <Notes className={styles["notes-container"]} notes={notes} />
       </div>
     </motion.div>
   );

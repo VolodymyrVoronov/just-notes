@@ -4,7 +4,7 @@ interface INotes {
   id: number;
   note: string;
   color: keyof typeof Color;
-  favorites: boolean;
+  favorite: boolean;
   updatedAt: string;
   createdAt: string;
   user: {
