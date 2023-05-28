@@ -31,3 +31,19 @@
 
   padding: 50px;
 }
+
+.searchInput {
+  margin-top: 10px;
+}
+
+.notesTitle {
+  margin-top: 55px;
+
+  font-family: var(--poppins);
+  font-size: 65px;
+  line-height: 65px;
+  font-weight: 900;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.50);
+
+  color: var(--black-light);
+}

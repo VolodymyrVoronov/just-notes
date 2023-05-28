@@ -1,4 +1,10 @@
-import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from "react";
+import {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  memo,
+  useRef,
+  useState,
+} from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
 import { useClickAway } from "ahooks";
@@ -119,4 +125,4 @@ const SideBar = ({
   );
 };
 
-export default SideBar;
+export default memo(SideBar);
