@@ -98,14 +98,15 @@ const NotesPage = () => {
 
             setErrorMessage(msg);
           }
-        } else {
-          const dataRes: unknown = JSON.parse(await res.text());
+          return;
+        }
 
-          if (typeof dataRes === "object" && dataRes && "data" in dataRes) {
-            const data = dataRes.data as { notes: INotes[] };
+        const dataRes: unknown = JSON.parse(await res.text());
 
-            setNotes(data.notes);
-          }
+        if (typeof dataRes === "object" && dataRes && "data" in dataRes) {
+          const data = dataRes.data as { notes: INotes[] };
+
+          setNotes(data.notes);
         }
       } catch (error) {
         setLoading(false);
