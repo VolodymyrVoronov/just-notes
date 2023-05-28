@@ -14,12 +14,14 @@ interface ISideBarProps
   onAddNoteButtonClick: (color: string) => void;
   onFavoritesNotesButtonClick: () => void;
   onSignOutButtonClick: () => void;
+  loading: boolean;
 }
 
 const SideBar = ({
   onAddNoteButtonClick,
   onFavoritesNotesButtonClick,
   onSignOutButtonClick,
+  loading,
   className,
 
   ...props
@@ -67,6 +69,7 @@ const SideBar = ({
           aria-label="Create and add note button"
           iconHeight={40}
           iconWidth={40}
+          disabled={loading}
         />
       </motion.div>
 
@@ -99,6 +102,7 @@ const SideBar = ({
           aria-label="Show favorites notes"
           iconHeight={20}
           iconWidth={20}
+          disabled={loading}
         />
 
         <Button
