@@ -1,6 +1,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   min-width: 300px;
   height: 300px;
@@ -56,11 +57,11 @@
 }
 
 .note-container {
-  height: 200px;
+  height: 225px;
 
   padding-right: 5px;
 
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .note {
@@ -71,7 +72,7 @@
 
 .note-textarea {
   width: 100%;
-  height: calc(300px - 26px * 4);
+  height: 220px;
 
   overflow: auto;
 
@@ -108,7 +109,7 @@
   flex-direction: row;
   align-items: center;
 
-  margin-top: auto;
+  /* margin-top: auto; */
 }
 
 .note-created-date {

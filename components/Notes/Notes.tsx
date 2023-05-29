@@ -40,17 +40,15 @@ const Notes = ({
   return (
     <div className={cn(styles.root, className)} {...props}>
       <AnimatePresence>
-        {notes.map((note) => (
+        {notes.map((note, index) => (
           <motion.div
             key={note.id}
             initial={{ opacity: 0 }}
-            exit={{ opacity: 0 }}
+            exit={{
+              opacity: 0,
+            }}
             animate={{
               opacity: 1,
-              transition: {
-                duration: 0.2,
-                ease: "easeIn",
-              },
             }}
           >
             <Note
