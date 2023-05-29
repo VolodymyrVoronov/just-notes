@@ -20,22 +20,96 @@ const NotesPage = () => {
   const [searchedNote, setSearchedNote] = useState<string>("");
 
   const onAddNoteButtonClick = useCallback((color: string): void => {
-    console.log("color", color);
+    setNotes((prevNotes) => [
+      {
+        id: -1,
+        note: "",
+        color,
+        favorite: false,
+        createdAt: "",
+        updatedAt: "",
+        user: {
+          id: -1,
+          name: "",
+        },
+        userId: -1,
+      } as INote,
+      ...prevNotes,
+    ]);
   }, []);
 
-  const onSaveNoteButtonClick = async (note: string, color: string) => {
+  const onSaveNoteButtonClick = async (
+    id: number | null,
+    note: string,
+    color: string
+  ) => {
     setLoading(true);
 
     if (errorMessage) {
       setErrorMessage("");
     }
 
+    console.log(id, note, color);
+
     try {
-      const res = await fetch("/api/notes/note", {
+      const res = await fetch(
+        id === -1 ? "/api/notes/note" : "/api/notes/note/update",
+        id === -1
+          ? {
+              method: HttpMethod.POST,
+              body: JSON.stringify({
+                note,
+                color,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          : {
+              method: HttpMethod.PUT,
+              body: JSON.stringify({
+                id,
+                note,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+      );
+
+      setLoading(false);
+
+      if (!res.ok) {
+        const dataRes: unknown = JSON.parse(await res.text());
+
+        if (typeof dataRes === "object" && dataRes && "message" in dataRes) {
+          const msg = dataRes.message as string;
+
+          setErrorMessage(msg);
+        }
+
+        return;
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
+
+  const onDeleteNoteButtonClick = async (id: number): Promise<void> => {
+    if (id === -1) {
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/notes/note/delete", {
         method: HttpMethod.POST,
         body: JSON.stringify({
-          note,
-          color,
+          id,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -191,7 +265,12 @@ const NotesPage = () => {
           Notes
         </motion.span>
 
-        <Notes className={styles["notes-container"]} notes={notes} />
+        <Notes
+          className={styles["notes-container"]}
+          notes={notes}
+          onSaveNoteButtonClick={onSaveNoteButtonClick}
+          onDeleteNoteButtonClick={onDeleteNoteButtonClick}
+        />
       </div>
     </motion.div>
   );

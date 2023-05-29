@@ -1,5 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useState } from "react";
 import cn from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
 
 import INote from "../../types/note";
 
@@ -11,15 +12,48 @@ interface INotesProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   notes: INote[];
 
+  onSaveNoteButtonClick: (
+    id: number | null,
+    note: string,
+    color: string
+  ) => void;
+  onDeleteNoteButtonClick: (id: number) => void;
+
   className?: string;
 }
 
-const Notes = ({ notes, className, ...props }: INotesProps): JSX.Element => {
+const Notes = ({
+  notes,
+  onSaveNoteButtonClick,
+  onDeleteNoteButtonClick,
+  className,
+  ...props
+}: INotesProps): JSX.Element => {
+  const [noteToEditId, setNoteToEditId] = useState<number | null>(null);
+
+  const onEditButtonClick = (id: number | null): void => {
+    setNoteToEditId(id);
+  };
+
   return (
     <div className={cn(styles.root, className)} {...props}>
-      {notes.map((note) => (
-        <Note key={note.id} noteData={note} />
-      ))}
+      <AnimatePresence>
+        {notes.map((note, index) => (
+          <motion.div
+            key={note.id}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <Note
+              noteData={note}
+              onSaveNoteButtonClick={onSaveNoteButtonClick}
+              onEditButtonClick={onEditButtonClick}
+              onDeleteNoteButtonClick={onDeleteNoteButtonClick}
+              editedNote={noteToEditId}
+            />
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 };

@@ -5,7 +5,7 @@
   width: 300px;
   height: 300px;
 
-  padding: 25px;
+  padding: 15px;
 
   box-shadow: var(--box-shadow-small);
   border-radius: 25px;
@@ -49,4 +49,60 @@
 
 .root-lime:hover {
   background-color: var(--lime-hover);
+}
+
+.root-edited-mode {
+  opacity: 0.5;
+}
+
+.note-container {
+  max-height: 200px;
+}
+
+.note {
+  font-family: var(--poppins);
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.note-textarea {
+  width: calc(300px - 25px * 2);
+  height: calc(300px - 25px * 4);
+
+  font-family: var(--poppins);
+  font-size: 18px;
+  line-height: 20px;
+
+  border: none;
+  background-color: transparent;
+  resize: none;
+}
+
+.note-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-top: auto;
+}
+
+.note-created-date {
+  font-family: var(--poppins);
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.note-buttons {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}
+
+.note-button {
+  margin-right: 10px;
+  padding: 10px;
+}
+
+.note-button-edit {
+  margin-right: 0px;
 }
