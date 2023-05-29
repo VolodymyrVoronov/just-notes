@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import HttpMethod from "../../../types/httpMethod";
 import INote from "../../../types/note";
+import ID from "../../../types/default-id";
 
 import SideBar from "../../../components/SideBar/SideBar";
 import SearchInput from "../../../components/SearchInput/SearchInput";
@@ -22,17 +23,17 @@ const NotesPage = () => {
   const onAddNoteButtonClick = useCallback((color: string): void => {
     setNotes((prevNotes) => [
       {
-        id: -1,
+        id: ID.default,
         note: "",
         color,
         favorite: false,
         createdAt: "",
         updatedAt: "",
         user: {
-          id: -1,
+          id: ID.default,
           name: "",
         },
-        userId: -1,
+        userId: ID.default,
       } as INote,
       ...prevNotes,
     ]);
@@ -53,8 +54,8 @@ const NotesPage = () => {
 
     try {
       const res = await fetch(
-        id === -1 ? "/api/notes/note" : "/api/notes/note/update",
-        id === -1
+        id === ID.default ? "/api/notes/note" : "/api/notes/note/update",
+        id === ID.default
           ? {
               method: HttpMethod.POST,
               body: JSON.stringify({
@@ -99,7 +100,7 @@ const NotesPage = () => {
   };
 
   const onDeleteNoteButtonClick = async (id: number): Promise<void> => {
-    if (id === -1) {
+    if (id === ID.default) {
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
 
       return;

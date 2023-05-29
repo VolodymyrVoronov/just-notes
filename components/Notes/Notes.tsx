@@ -41,8 +41,16 @@ const Notes = ({
         {notes.map((note, index) => (
           <motion.div
             key={note.id}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ scale: 0.5, opacity: 0 }}
+            exit={{ scale: 0.5, opacity: 0 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              transition: {
+                duration: 0.2,
+                ease: "easeInOut",
+              },
+            }}
           >
             <Note
               noteData={note}

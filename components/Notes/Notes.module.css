@@ -1,17 +1,12 @@
 .root {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 50px;
-
-  /* display: grid;
+  display: grid;
   align-content: flex-start;
 
-  grid-template-columns: repeat(auto-fit, 300px);
-  grid-gap: 50px; */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 50px;
 
   padding-bottom: 2px; 
-  padding-right: 2px;
+  padding-right: 5px;
 
   overflow-y: auto;
 }

@@ -11,6 +11,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import INote from "../../types/note";
 import Color from "../../types/color";
+import ID from "../../types/default-id";
+
 import Button from "../Button/Button";
 
 import styles from "./Note.module.css";
@@ -81,7 +83,7 @@ const Note = ({
   };
 
   useEffect(() => {
-    if (id === -1) {
+    if (id === ID.default) {
       setEditedMode(true);
       onEditButtonClick(id);
 
