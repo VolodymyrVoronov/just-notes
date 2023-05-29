@@ -2,6 +2,7 @@ import {
   DetailedHTMLProps,
   HTMLAttributes,
   memo,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -52,6 +53,10 @@ const SideBar = ({
   useClickAway(() => {
     setShowNotesIcons(false);
   }, ref);
+
+  useEffect(() => {
+    setShowFavoriteNotes(false);
+  }, [anyFavoriteNotes]);
 
   return (
     <div className={cn(styles.root, className)} {...props}>

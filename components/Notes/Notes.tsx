@@ -18,6 +18,7 @@ interface INotesProps
     color: string
   ) => void;
   onDeleteNoteButtonClick: (id: number) => void;
+  onFavoriteNoteButtonClick: (id: number, favorite: boolean) => void;
 
   className?: string;
 }
@@ -26,29 +27,29 @@ const Notes = ({
   notes,
   onSaveNoteButtonClick,
   onDeleteNoteButtonClick,
+  onFavoriteNoteButtonClick,
   className,
   ...props
 }: INotesProps): JSX.Element => {
-  const [noteToEditId, setNoteToEditId] = useState<number | null>(null);
+  const [editedNoteId, setEditedNoteId] = useState<number | null>(null);
 
   const onEditButtonClick = (id: number | null): void => {
-    setNoteToEditId(id);
+    setEditedNoteId(id);
   };
 
   return (
     <div className={cn(styles.root, className)} {...props}>
       <AnimatePresence>
-        {notes.map((note, index) => (
+        {notes.map((note) => (
           <motion.div
             key={note.id}
-            initial={{ scale: 0.5, opacity: 0 }}
-            exit={{ scale: 0.5, opacity: 0 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
             animate={{
-              scale: 1,
               opacity: 1,
               transition: {
                 duration: 0.2,
-                ease: "easeInOut",
+                ease: "easeIn",
               },
             }}
           >
@@ -57,7 +58,8 @@ const Notes = ({
               onSaveNoteButtonClick={onSaveNoteButtonClick}
               onEditButtonClick={onEditButtonClick}
               onDeleteNoteButtonClick={onDeleteNoteButtonClick}
-              editedNote={noteToEditId}
+              onFavoriteNoteButtonClick={onFavoriteNoteButtonClick}
+              editedNoteId={editedNoteId}
             />
           </motion.div>
         ))}

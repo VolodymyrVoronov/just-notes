@@ -28,7 +28,8 @@ interface INoteProps
   ) => void;
   onEditButtonClick: (id: number | null) => void;
   onDeleteNoteButtonClick: (id: number) => void;
-  editedNote: number | null;
+  onFavoriteNoteButtonClick: (id: number, favorite: boolean) => void;
+  editedNoteId: number | null;
 
   className?: string;
 }
@@ -38,7 +39,8 @@ const Note = ({
   onSaveNoteButtonClick,
   onEditButtonClick,
   onDeleteNoteButtonClick,
-  editedNote,
+  onFavoriteNoteButtonClick,
+  editedNoteId,
   className,
   ...props
 }: INoteProps): JSX.Element => {
@@ -50,8 +52,6 @@ const Note = ({
   const [editedMode, setEditedMode] = useState(false);
 
   const onEditClick = (): void => {
-    console.log("onEditClick");
-
     setEditedMode(true);
     onEditButtonClick(id);
     setEditedNoteData(note);
@@ -65,17 +65,21 @@ const Note = ({
 
   const onSaveClick = (): void => {
     setEditedMode(false);
-
-    console.log("onSaveClick");
-
-    onSaveNoteButtonClick(id, editedNoteData, color);
     onEditButtonClick(null);
+
+    if (note !== editedNoteData) {
+      onSaveNoteButtonClick(id, editedNoteData, color);
+    }
   };
 
   const onDeleteClick = (): void => {
     setEditedMode(false);
-    onDeleteNoteButtonClick(id);
     onEditButtonClick(null);
+    onDeleteNoteButtonClick(id);
+  };
+
+  const onFavoriteClick = (): void => {
+    onFavoriteNoteButtonClick(id, !favorite);
   };
 
   const onTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -93,6 +97,10 @@ const Note = ({
         clearTimeout(tId);
       }, 250);
     }
+
+    return () => {
+      if (id === ID.default) onEditButtonClick(null);
+    };
   }, [id, note, noteData, onEditButtonClick]);
 
   // length 225
@@ -106,7 +114,7 @@ const Note = ({
         [styles["root-blue"]]: color === Color.blue,
         [styles["root-lime"]]: color === Color.lime,
         [styles["root-edited-mode"]]:
-          editedNote !== id && editedNote !== null && !editedMode,
+          editedNoteId !== id && editedNoteId !== null && !editedMode,
       })}
       {...props}
     >
@@ -189,7 +197,7 @@ const Note = ({
               }}
             >
               <Button
-                onClick={() => {}}
+                onClick={onFavoriteClick}
                 className={cn(styles["note-button"])}
                 hasText={false}
                 iconUrl={
@@ -250,6 +258,7 @@ const Note = ({
                 aria-label={editedMode ? "" : "Note marked as not favorite"}
                 iconHeight={15}
                 iconWidth={15}
+                disabled={!editedNoteData}
               />
             </motion.div>
           </AnimatePresence>

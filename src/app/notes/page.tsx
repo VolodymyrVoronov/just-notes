@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState, useRef } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
@@ -15,10 +15,54 @@ import Notes from "../../../components/Notes/Notes";
 import styles from "./styles.module.css";
 
 const NotesPage = () => {
+  const showFavoriteNotesRef = useRef<boolean>(false);
+
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [notes, setNotes] = useState<INote[]>([]);
   const [searchedNote, setSearchedNote] = useState<string>("");
+  const [showFavoriteNotes, setShowFavoriteNotes] = useState<boolean>(false);
+
+  const fetchAllNotes = async (): Promise<void> => {
+    setLoading(true);
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/notes", {
+        method: HttpMethod.GET,
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setLoading(false);
+
+      if (!res.ok) {
+        const dataRes: unknown = JSON.parse(await res.text());
+
+        if (typeof dataRes === "object" && dataRes && "message" in dataRes) {
+          const msg = dataRes.message as string;
+
+          setErrorMessage(msg);
+        }
+        return;
+      }
+
+      const dataRes: unknown = JSON.parse(await res.text());
+
+      if (typeof dataRes === "object" && dataRes && "data" in dataRes) {
+        const data = dataRes.data as { notes: INote[] };
+
+        setNotes(data.notes);
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
 
   const onAddNoteButtonClick = useCallback((color: string): void => {
     setNotes((prevNotes) => [
@@ -79,6 +123,8 @@ const NotesPage = () => {
       );
 
       setLoading(false);
+      setNotes([]);
+      fetchAllNotes();
 
       if (!res.ok) {
         const dataRes: unknown = JSON.parse(await res.text());
@@ -118,6 +164,47 @@ const NotesPage = () => {
       });
 
       setLoading(false);
+      setNotes([]);
+      fetchAllNotes();
+
+      if (!res.ok) {
+        const dataRes: unknown = JSON.parse(await res.text());
+
+        if (typeof dataRes === "object" && dataRes && "message" in dataRes) {
+          const msg = dataRes.message as string;
+
+          setErrorMessage(msg);
+        }
+
+        return;
+      }
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
+    }
+  };
+
+  const onFavoriteNoteButtonClick = async (
+    id: number,
+    favorite: boolean
+  ): Promise<void> => {
+    try {
+      const res = await fetch("/api/notes/note/favorite", {
+        method: HttpMethod.PUT,
+        body: JSON.stringify({
+          id,
+          favorite,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setLoading(false);
+      setNotes([]);
+      fetchAllNotes();
 
       if (!res.ok) {
         const dataRes: unknown = JSON.parse(await res.text());
@@ -139,7 +226,7 @@ const NotesPage = () => {
   };
 
   const onFavoriteNotesButtonClick = useCallback((): void => {
-    console.log("onFavoriteNotesButtonClick");
+    setShowFavoriteNotes((prev) => !prev);
   }, []);
 
   const onSignOutButtonClick = useCallback((): void => {
@@ -151,49 +238,14 @@ const NotesPage = () => {
   };
 
   useEffect(() => {
-    const fetchAllNotes = async (): Promise<void> => {
-      setLoading(true);
-      setErrorMessage("");
-
-      try {
-        const res = await fetch("/api/notes", {
-          method: HttpMethod.GET,
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        setLoading(false);
-
-        if (!res.ok) {
-          const dataRes: unknown = JSON.parse(await res.text());
-
-          if (typeof dataRes === "object" && dataRes && "message" in dataRes) {
-            const msg = dataRes.message as string;
-
-            setErrorMessage(msg);
-          }
-          return;
-        }
-
-        const dataRes: unknown = JSON.parse(await res.text());
-
-        if (typeof dataRes === "object" && dataRes && "data" in dataRes) {
-          const data = dataRes.data as { notes: INote[] };
-
-          setNotes(data.notes);
-        }
-      } catch (error) {
-        setLoading(false);
-        if (error instanceof Error) {
-          setErrorMessage(error.message);
-        }
-      }
-    };
-
     fetchAllNotes();
   }, []);
+
+  useEffect(() => {
+    if (!notes.every((note) => note.favorite)) {
+      setShowFavoriteNotes(false);
+    }
+  }, [notes]);
 
   return (
     <motion.div
@@ -268,9 +320,12 @@ const NotesPage = () => {
 
         <Notes
           className={styles["notes-container"]}
-          notes={notes}
+          notes={
+            showFavoriteNotes ? notes.filter((note) => note.favorite) : notes
+          }
           onSaveNoteButtonClick={onSaveNoteButtonClick}
           onDeleteNoteButtonClick={onDeleteNoteButtonClick}
+          onFavoriteNoteButtonClick={onFavoriteNoteButtonClick}
         />
       </div>
     </motion.div>

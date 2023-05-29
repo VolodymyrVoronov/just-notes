@@ -56,7 +56,11 @@
 }
 
 .note-container {
-  max-height: 200px;
+  height: 200px;
+
+  padding-right: 5px;
+
+  overflow: auto;
 }
 
 .note {
@@ -67,7 +71,9 @@
 
 .note-textarea {
   width: 100%;
-  height: calc(300px - 25px * 4);
+  height: calc(300px - 26px * 4);
+
+  overflow: auto;
 
   font-family: var(--poppins);
   font-size: 18px;
@@ -76,6 +82,25 @@
   border: none;
   background-color: transparent;
   resize: none;
+}
+.note-container::-webkit-scrollbar,
+.note-textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.note-container::-webkit-scrollbar-track,
+.note-textarea::-webkit-scrollbar-track {
+  background-color: var(--gray-lighter-third);
+}
+
+.note-container::-webkit-scrollbar-thumb,
+.note-textarea::-webkit-scrollbar-thumb {
+  background-color: var(--gray-light);
+}
+
+.note-container::-webkit-scrollbar-thumb:hover,
+.note-textarea::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gray-lighter);
 }
 
 .note-footer {
