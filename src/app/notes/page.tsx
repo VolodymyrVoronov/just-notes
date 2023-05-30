@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useCallback, useEffect, useState, useRef } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
@@ -15,8 +15,6 @@ import Notes from "../../../components/Notes/Notes";
 import styles from "./styles.module.css";
 
 const NotesPage = () => {
-  const showFavoriteNotesRef = useRef<boolean>(false);
-
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [notes, setNotes] = useState<INote[]>([]);
