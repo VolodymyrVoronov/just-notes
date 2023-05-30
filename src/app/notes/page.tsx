@@ -94,8 +94,6 @@ const NotesPage = () => {
       setErrorMessage("");
     }
 
-    console.log(id, note, color);
-
     try {
       const res = await fetch(
         id === ID.default ? "/api/notes/note" : "/api/notes/note/update",
@@ -247,6 +245,14 @@ const NotesPage = () => {
     }
   }, [notes]);
 
+  const clonedNotes = showFavoriteNotes
+    ? notes.slice().filter((note) => note.favorite)
+    : notes.slice();
+
+  const filteredNotes = clonedNotes.filter((note) =>
+    note.note.toLowerCase().includes(searchedNote.toLowerCase())
+  );
+
   return (
     <motion.div
       initial={{
@@ -320,9 +326,7 @@ const NotesPage = () => {
 
         <Notes
           className={styles["notes-container"]}
-          notes={
-            showFavoriteNotes ? notes.filter((note) => note.favorite) : notes
-          }
+          notes={searchedNote.length > 0 ? filteredNotes : clonedNotes}
           onSaveNoteButtonClick={onSaveNoteButtonClick}
           onDeleteNoteButtonClick={onDeleteNoteButtonClick}
           onFavoriteNoteButtonClick={onFavoriteNoteButtonClick}
