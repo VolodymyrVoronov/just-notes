@@ -19,6 +19,7 @@ interface INotesProps
   ) => void;
   onDeleteNoteButtonClick: (id: number) => void;
   onFavoriteNoteButtonClick: (id: number, favorite: boolean) => void;
+  searchedNotesQuery?: string;
 
   className?: string;
 }
@@ -28,6 +29,7 @@ const Notes = ({
   onSaveNoteButtonClick,
   onDeleteNoteButtonClick,
   onFavoriteNoteButtonClick,
+  searchedNotesQuery,
   className,
   ...props
 }: INotesProps): JSX.Element => {
@@ -40,7 +42,7 @@ const Notes = ({
   return (
     <div className={cn(styles.root, className)} {...props}>
       <AnimatePresence>
-        {notes.map((note, index) => (
+        {notes.map((note) => (
           <motion.div
             key={note.id}
             initial={{ opacity: 0 }}
@@ -58,6 +60,7 @@ const Notes = ({
               onDeleteNoteButtonClick={onDeleteNoteButtonClick}
               onFavoriteNoteButtonClick={onFavoriteNoteButtonClick}
               editedNoteId={editedNoteId}
+              searchedNotesQuery={searchedNotesQuery}
             />
           </motion.div>
         ))}

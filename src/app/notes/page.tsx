@@ -20,7 +20,7 @@ const NotesPage = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [notes, setNotes] = useState<INote[]>([]);
-  const [searchedNote, setSearchedNote] = useState<string>("");
+  const [searchedNotesQuery, setSearchedNotesQuery] = useState<string>("");
   const [showFavoriteNotes, setShowFavoriteNotes] = useState<boolean>(false);
 
   const fetchAllNotes = async (): Promise<void> => {
@@ -232,7 +232,7 @@ const NotesPage = () => {
   }, []);
 
   const onSearchNoteInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setSearchedNote(e.target.value);
+    setSearchedNotesQuery(e.target.value);
   };
 
   useEffect(() => {
@@ -250,7 +250,7 @@ const NotesPage = () => {
     : notes.slice();
 
   const filteredNotes = clonedNotes.filter((note) =>
-    note.note.toLowerCase().includes(searchedNote.toLowerCase())
+    note.note.toLowerCase().includes(searchedNotesQuery.toLowerCase())
   );
 
   return (
@@ -299,7 +299,7 @@ const NotesPage = () => {
         >
           <SearchInput
             onChange={onSearchNoteInputChange}
-            value={searchedNote}
+            value={searchedNotesQuery}
             disabled={loading}
             aria-label="Search notes"
           />
@@ -326,10 +326,11 @@ const NotesPage = () => {
 
         <Notes
           className={styles["notes-container"]}
-          notes={searchedNote.length > 0 ? filteredNotes : clonedNotes}
+          notes={searchedNotesQuery.length > 0 ? filteredNotes : clonedNotes}
           onSaveNoteButtonClick={onSaveNoteButtonClick}
           onDeleteNoteButtonClick={onDeleteNoteButtonClick}
           onFavoriteNoteButtonClick={onFavoriteNoteButtonClick}
+          searchedNotesQuery={searchedNotesQuery}
         />
       </div>
     </motion.div>

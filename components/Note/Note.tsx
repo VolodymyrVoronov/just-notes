@@ -8,6 +8,7 @@ import {
 } from "react";
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
+import Highlighter from "react-highlight-words";
 
 import INote from "../../types/note";
 import Color from "../../types/color";
@@ -30,6 +31,7 @@ interface INoteProps
   onDeleteNoteButtonClick: (id: number) => void;
   onFavoriteNoteButtonClick: (id: number, favorite: boolean) => void;
   editedNoteId: number | null;
+  searchedNotesQuery?: string;
 
   className?: string;
 }
@@ -41,6 +43,7 @@ const Note = ({
   onDeleteNoteButtonClick,
   onFavoriteNoteButtonClick,
   editedNoteId,
+  searchedNotesQuery,
   className,
   ...props
 }: INoteProps): JSX.Element => {
@@ -58,6 +61,11 @@ const Note = ({
 
     const tId = setTimeout(() => {
       textAreaRef.current?.focus();
+
+      textAreaRef.current?.setSelectionRange(
+        editedNoteData.length,
+        editedNoteData.length
+      );
 
       clearTimeout(tId);
     }, 250);
@@ -163,7 +171,11 @@ const Note = ({
               }}
               className={styles.note}
             >
-              {note}
+              <Highlighter
+                searchWords={[searchedNotesQuery || ""]}
+                autoEscape
+                textToHighlight={note}
+              />
             </motion.span>
           )}
         </AnimatePresence>
@@ -177,44 +189,46 @@ const Note = ({
         )}
 
         <div className={styles["note-buttons"]}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={String(favorite)}
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-                transition: {
-                  duration: 0.5,
-                },
-              }}
-              exit={{
-                opacity: 0,
-                transition: {
-                  duration: 0.5,
-                },
-              }}
-            >
-              <Button
-                onClick={onFavoriteClick}
-                className={cn(styles["note-button"])}
-                hasText={false}
-                iconUrl={
-                  favorite
-                    ? "/icons/star-yellow-01.svg"
-                    : "/icons/star-white-01.svg"
-                }
-                aria-label={
-                  favorite
-                    ? "Note marked as favorite"
-                    : "Note marked as not favorite"
-                }
-                iconHeight={15}
-                iconWidth={15}
-              />
-            </motion.div>
-          </AnimatePresence>
+          {id !== ID.default && (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={String(favorite)}
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    duration: 0.5,
+                  },
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: {
+                    duration: 0.5,
+                  },
+                }}
+              >
+                <Button
+                  onClick={onFavoriteClick}
+                  className={cn(styles["note-button"])}
+                  hasText={false}
+                  iconUrl={
+                    favorite
+                      ? "/icons/star-yellow-01.svg"
+                      : "/icons/star-white-01.svg"
+                  }
+                  aria-label={
+                    favorite
+                      ? "Note marked as favorite"
+                      : "Note marked as not favorite"
+                  }
+                  iconHeight={15}
+                  iconWidth={15}
+                />
+              </motion.div>
+            </AnimatePresence>
+          )}
 
           <Button
             onClick={onDeleteClick}

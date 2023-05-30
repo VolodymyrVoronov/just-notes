@@ -84,6 +84,11 @@
   background-color: transparent;
   resize: none;
 }
+
+.note-textarea[contenteditable] {
+  color: var(--gray);
+}
+
 .note-container::-webkit-scrollbar,
 .note-textarea::-webkit-scrollbar {
   width: 5px;
