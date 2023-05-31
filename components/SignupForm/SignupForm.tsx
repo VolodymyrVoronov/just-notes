@@ -8,6 +8,7 @@ import { SignUpFormState } from "../../types/form-state";
 import Key from "../../types/keys";
 import Path from "../../types/paths";
 import HttpMethod from "../../types/http-method";
+import ApiRoute from "../../types/api-route";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";
@@ -63,7 +64,7 @@ const SignupForm = ({ className }: ISignupFormProps): JSX.Element => {
     }
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch(ApiRoute.SING_UP, {
         method: HttpMethod.POST,
         body: JSON.stringify(formData),
         headers: {

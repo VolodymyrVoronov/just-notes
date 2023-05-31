@@ -111,8 +111,6 @@ const Note = ({
     };
   }, [id, note, noteData, onEditButtonClick]);
 
-  // length 225
-
   return (
     <div
       className={cn(styles.root, className, {

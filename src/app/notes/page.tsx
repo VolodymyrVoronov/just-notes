@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import HttpMethod from "../../../types/http-method";
 import INote from "../../../types/note";
 import ID from "../../../types/default-id";
+import ApiRoute from "../../../types/api-route";
 
 import SideBar from "../../../components/SideBar/SideBar";
 import SearchInput from "../../../components/SearchInput/SearchInput";
@@ -26,7 +27,7 @@ const NotesPage = () => {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/notes", {
+      const res = await fetch(ApiRoute.FETCH_ALL_NOTES, {
         method: HttpMethod.GET,
 
         headers: {
@@ -94,7 +95,7 @@ const NotesPage = () => {
 
     try {
       const res = await fetch(
-        id === ID.default ? "/api/notes/note" : "/api/notes/note/update",
+        id === ID.default ? ApiRoute.CREATE_NOTE : ApiRoute.UPDATE_NOTE,
         id === ID.default
           ? {
               method: HttpMethod.POST,
@@ -149,7 +150,7 @@ const NotesPage = () => {
     }
 
     try {
-      const res = await fetch("/api/notes/note/delete", {
+      const res = await fetch(ApiRoute.DELETE_NOTE, {
         method: HttpMethod.POST,
         body: JSON.stringify({
           id,
@@ -187,7 +188,7 @@ const NotesPage = () => {
     favorite: boolean
   ): Promise<void> => {
     try {
-      const res = await fetch("/api/notes/note/favorite", {
+      const res = await fetch(ApiRoute.ADD_NOTE_TO_FAVORITE, {
         method: HttpMethod.PUT,
         body: JSON.stringify({
           id,
@@ -244,8 +245,8 @@ const NotesPage = () => {
   }, [notes]);
 
   const clonedNotes = showFavoriteNotes
-    ? notes.slice().filter((note) => note.favorite)
-    : notes.slice();
+    ? structuredClone(notes).filter((note) => note.favorite)
+    : structuredClone(notes);
 
   const filteredNotes = clonedNotes.filter((note) =>
     note.note.toLowerCase().includes(searchedNotesQuery.toLowerCase())
