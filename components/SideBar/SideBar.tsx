@@ -35,7 +35,7 @@ const SideBar = ({
 
   ...props
 }: ISideBarProps): JSX.Element => {
-  const ref = useRef<HTMLButtonElement>(null);
+  const sideBarRef = useRef<HTMLButtonElement>(null);
 
   const [showNotesIcons, setShowNotesIcons] = useState(false);
   const [showFavoriteNotes, setShowFavoriteNotes] = useState(false);
@@ -52,7 +52,7 @@ const SideBar = ({
 
   useClickAway(() => {
     setShowNotesIcons(false);
-  }, ref);
+  }, sideBarRef);
 
   useEffect(() => {
     setShowFavoriteNotes(false);
@@ -78,7 +78,7 @@ const SideBar = ({
         }}
       >
         <Button
-          ref={ref}
+          ref={sideBarRef}
           onClick={() => setShowNotesIcons(!showNotesIcons)}
           className={cn(styles["add-note-button"], {
             [styles["add-note-button--active"]]: showNotesIcons,
@@ -122,13 +122,13 @@ const SideBar = ({
             animate={{
               opacity: 1,
               transition: {
-                duration: 0.5,
+                duration: 0.2,
               },
             }}
             exit={{
               opacity: 0,
               transition: {
-                duration: 0.5,
+                duration: 0.2,
               },
             }}
             className={styles["note-button-wrapper"]}

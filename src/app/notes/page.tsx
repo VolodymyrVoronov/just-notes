@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
@@ -322,6 +323,18 @@ const NotesPage = () => {
         >
           Notes
         </motion.span>
+
+        {!notes.length && (
+          <span className={styles["no-notes"]}>
+            No notes yet...&nbsp;
+            <Image
+              src="/icons/inbox-01.svg"
+              width={18}
+              height={18}
+              alt="icon"
+            />
+          </span>
+        )}
 
         <Notes
           className={styles["notes-container"]}
