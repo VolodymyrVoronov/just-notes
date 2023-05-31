@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import HttpMethod from "../../../types/http-method";
 import INote from "../../../types/note";
@@ -324,17 +324,42 @@ const NotesPage = () => {
           Notes
         </motion.span>
 
-        {!notes.length && (
-          <span className={styles["no-notes"]}>
-            No notes yet...&nbsp;
-            <Image
-              src="/icons/inbox-01.svg"
-              width={18}
-              height={18}
-              alt="icon"
-            />
-          </span>
-        )}
+        <AnimatePresence>
+          {!notes.length && (
+            <motion.span
+              key={notes.length}
+              className={styles["no-notes"]}
+              initial={{
+                x: -50,
+                opacity: 0,
+              }}
+              exit={{
+                x: -50,
+                opacity: 0,
+                transition: {
+                  duration: 0.5,
+                },
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  delay: 2,
+                  duration: 0.5,
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              No notes yet...&nbsp;
+              <Image
+                src="/icons/inbox-01.svg"
+                width={18}
+                height={18}
+                alt="icon"
+              />
+            </motion.span>
+          )}
+        </AnimatePresence>
 
         <Notes
           className={styles["notes-container"]}

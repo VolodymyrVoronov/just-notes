@@ -49,6 +49,10 @@
 }
 
 .no-notes {
+  position: absolute;
+  
+  bottom: 50px;
+
   display: flex;
   align-items: center;
 
