@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { authOptions } from "./auth/[...nextauth]/route";
 
 // eslint-disable-next-line import/prefer-default-export
-export const GET = async (request: Request) => {
+export const GET = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session) {

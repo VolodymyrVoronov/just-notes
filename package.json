@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-types": "tsc --noEmit",
+    "eslint": "eslint \"src/**/*.{ts,tsx}\" --quiet"
   },
   "dependencies": {
     "@fontsource/bungee-shade": "^4.5.10",
