@@ -7,7 +7,7 @@ import { useEventListener } from "ahooks";
 import { SignUpFormState } from "../../types/form-state";
 import Key from "../../types/keys";
 import Path from "../../types/paths";
-import HttpMethod from "../../types/httpMethod";
+import HttpMethod from "../../types/http-method";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 import Input from "../Input/Input";

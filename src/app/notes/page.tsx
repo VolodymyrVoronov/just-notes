@@ -4,7 +4,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 
-import HttpMethod from "../../../types/httpMethod";
+import HttpMethod from "../../../types/http-method";
 import INote from "../../../types/note";
 import ID from "../../../types/default-id";
 
